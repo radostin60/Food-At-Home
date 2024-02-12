@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Food_At_Home.Data.Models
+namespace Food_At_Home.Models
 {
     public class LoginViewModel
     {

@@ -1,4 +1,5 @@
 ﻿using Food_At_Home.Data.Models;
+using Food_At_Home.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +28,7 @@ namespace Food_At_Home.Controllers
         {
             if(User?.Identity?.IsAuthenticated ?? false)
             {
-                return RedirectToAction("All", "Books");
+                return RedirectToAction("All", "");
             }
 
             var model = new RegisterViewModel();
@@ -75,7 +76,7 @@ namespace Food_At_Home.Controllers
         {
             if (User?.Identity?.IsAuthenticated ?? false)
             {
-                return RedirectToAction("All", "Books");
+                return RedirectToAction("All", "");
             }
             var model = new LoginViewModel();
 
@@ -99,7 +100,7 @@ namespace Food_At_Home.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("All", "Books");
+                    return RedirectToAction("All", "");
                 }
 
             }
