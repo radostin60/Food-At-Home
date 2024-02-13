@@ -7,10 +7,10 @@ namespace Food_At_Home.Data.Models
     {
         [Required]
         [StringLength(20)]
-        public string FirstName { get; set; }
+        public string FirstName { get; set; } = null!;
 
         [Required]
         [StringLength(20)]
-        public string LastName { get;set; }
+        public string LastName { get; set; } = null!;
     }
 }
