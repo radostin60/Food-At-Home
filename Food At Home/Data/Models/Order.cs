@@ -1,4 +1,5 @@
 ﻿using Food_At_Home.Data.Models.Enums;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -23,6 +24,17 @@ namespace Food_At_Home.Data.Models
 
         [Required]
         public DateTime DeliveryTime { get; set; }
+
+        [Required]
+        [Precision(4,2)]
+        public decimal Price { get; set; }
+
+        [ForeignKey(nameof(Payment))]
+        public string? PaymentId { get; set; }
+
+        public Payment? Payment { get; set; }
+
+        public virtual ICollection<OrderDish> Dishes { get; set; }
 
 
     }
