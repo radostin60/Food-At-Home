@@ -5,9 +5,8 @@ namespace Food_At_Home.Data.Models
 {
     public class Restaurant
     {
-        public Restaurant() 
+        public Restaurant()
         {
-            this.IsActive = true;
             this.Orders = new List<Order>();
             this.Menu = new List<Dish>();
         }
@@ -18,9 +17,12 @@ namespace Food_At_Home.Data.Models
         [Required]
         [ForeignKey(nameof(User))]
         public Guid UserId { get; set; }
-        public User User { get; set; }
+        public User User { get; set; } = null!;
 
+        public string? Description { get; set; }
 
+        public ICollection<Order> Orders { get; set; }
+        public ICollection<Dish> Menu { get; set; }
 
 
     }

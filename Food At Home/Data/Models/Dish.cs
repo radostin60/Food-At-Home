@@ -9,7 +9,6 @@ namespace Food_At_Home.Data.Models
     {
         public Dish()
         {
-            this.IsActive = true;
             this.Orders = new List<OrderDish>();
         }
 
@@ -39,7 +38,6 @@ namespace Food_At_Home.Data.Models
 
         public int Quantity { get; set; }
 
-        public bool IsActive { get; set; }
 
         public ICollection<OrderDish> Orders { get; set; }
 

@@ -12,12 +12,12 @@ namespace Food_At_Home.Data.Models
 
         [Required]
         [EnumDataType(typeof(OrderStatus))]
-        public string Status { get; set; }
+        public string Status { get; set; } = null!;
 
         [Required]
         [ForeignKey(nameof(Restaurant))]
         public Guid RestaurantId { get; set; }
-        public Restaurant Restaurant { get; set; }
+        public Restaurant Restaurant { get; set; } = null!;
 
         [Required]
         public DateTime OrderTime { get; set; }
@@ -34,7 +34,7 @@ namespace Food_At_Home.Data.Models
 
         public Payment? Payment { get; set; }
 
-        public virtual ICollection<OrderDish> Dishes { get; set; }
+        public virtual ICollection<OrderDish> Dishes { get; set; } = null!;
 
 
     }

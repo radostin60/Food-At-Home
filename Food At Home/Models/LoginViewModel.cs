@@ -10,6 +10,6 @@ namespace Food_At_Home.Models
 
         [Required]
         [DataType(DataType.Password)]
-        public string Password { get; set; }
+        public string Password { get; set; } = null!;
     }
 }
