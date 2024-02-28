@@ -39,6 +39,36 @@ namespace Food_At_Home.Data
             .HasMaxLength(20)
             .IsRequired();
 
+            builder.Entity<OrderDish>()
+                .HasKey(od => new { od.OrderId, od.DishId});
+
+            builder.Entity<Restaurant>()
+                .HasMany(o => o.Orders)
+                .WithOne(r => r.Restaurant);
+
+            builder.Entity<Restaurant>()
+                .HasMany(m => m.Menu)
+                .WithOne(r => r.Restaurant);
+
+            builder.Entity<Restaurant>()
+                .Property(x => x.Description)
+                .HasColumnType("nvarchar")
+                .HasMaxLength(600);
+
+            builder.Entity<Order>()
+                .HasOne(r => r.Restaurant)
+                .WithMany(o => o.Orders);
+
+            builder.Entity<Order>()
+                .HasMany(d => d.Dishes)
+                .WithOne(o => o.Order);
+
+            builder.Entity<Order>()
+
+
+
+      
+
             base.OnModelCreating(builder);
 
 
