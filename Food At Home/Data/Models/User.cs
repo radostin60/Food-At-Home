@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Food_At_Home.Data.Models
 {
-    public class User:IdentityUser
+    public class User:IdentityUser<Guid>
     {
         [Required]
         [StringLength(20)]

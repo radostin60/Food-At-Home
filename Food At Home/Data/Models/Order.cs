@@ -30,7 +30,7 @@ namespace Food_At_Home.Data.Models
         public decimal Price { get; set; }
 
         [ForeignKey(nameof(Payment))]
-        public string? PaymentId { get; set; }
+        public Guid? PaymentId { get; set; }
 
         public Payment? Payment { get; set; }
 
