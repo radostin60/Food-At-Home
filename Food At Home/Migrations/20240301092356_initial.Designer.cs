@@ -9,10 +9,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Food_At_Home.Data.Migrations
+namespace Food_At_Home.Migrations
 {
     [DbContext(typeof(FoodDbContext))]
-    [Migration("20240229064207_initial")]
+    [Migration("20240301092356_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
