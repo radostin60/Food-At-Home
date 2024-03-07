@@ -1,3 +1,30 @@
-﻿
-@{
-}
+﻿@using Food_At_Home.Data.Models;
+@model RegisterViewModel
+
+<div class="background">
+    <div class="shape"></div>
+    <div class="shape"></div>
+</div>
+<form method="post">
+    <h3>Register Here Here</h3>
+
+    <label for=" ">First Name</label>
+    <input asp-for="FirstName" type="text" placeholder="First Name" id=" ">
+
+    <label for=" ">Last Name</label>
+    <input asp-for="LastName" type="text" placeholder="Last Name" id=" ">
+
+    <label for=" ">Username</label>
+    <input asp-for="UserName" type="text" placeholder="Username" id=" ">
+
+    <label for=" ">Email</label>
+    <input asp-for="Email" type="text" placeholder="Email" id=" ">
+
+    <label for="password">Password</label>
+    <input asp-for="Password" type="password" placeholder="Password" id="password">
+
+    <label for="">Confirm Password</label>
+    <input asp-for="ConfirmPassword" type="password" placeholder="Confirm Password" id="">
+
+    <button type="submit">Log In</button>
+</form>

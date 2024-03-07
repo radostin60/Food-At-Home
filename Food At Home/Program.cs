@@ -15,6 +15,11 @@ builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfi
     .AddEntityFrameworkStores<FoodDbContext>();
 builder.Services.AddControllersWithViews();
 
+builder.Services.ConfigureApplicationCookie(opt =>
+{
+    opt.LoginPath = "/User/Login";
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
