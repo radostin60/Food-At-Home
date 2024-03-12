@@ -9,22 +9,22 @@
     <h3>Register Here</h3>
 
     <label for=" ">First Name</label>
-    <input asp-for="FirstName" type="text" placeholder="First Name" id=" ">
+    <input asp-for="FirstName" type="text" placeholder="First Name" >
 
     <label for=" ">Last Name</label>
-    <input asp-for="LastName" type="text" placeholder="Last Name" id=" ">
+    <input asp-for="LastName" type="text" placeholder="Last Name" >
 
     <label for=" ">Username</label>
-    <input asp-for="UserName" type="text" placeholder="Username" id=" ">
+    <input asp-for="UserName" type="text" placeholder="Username">
 
     <label for=" ">Email</label>
     <input asp-for="Email" type="email" placeholder="Email" id=" ">
 
     <label for="password">Password</label>
-    <input asp-for="Password" type="password" placeholder="Password" id="password">
+    <input asp-for="Password" type="password" placeholder="Password">
 
     <label for="">Confirm Password</label>
-    <input asp-for="ConfirmPassword" type="password" placeholder="Confirm Password" id="">
+    <input asp-for="ConfirmPassword" type="password" placeholder="Confirm Password">
 
     <button type="submit">Register</button>
 </form>
@@ -58,17 +58,17 @@
 
     .shape:last-child {
         background: linear-gradient( to right, #ff512f, #f09819 );
-        right: -30px;
+        right: -100px;
         bottom: -80px;
     }
 
     form {
-        height: 520px;
+        height: fit-content;
         width: 400px;
         background-color: rgba(255,255,255,0.13);
         position: absolute;
         transform: translate(-50%,-50%);
-        top: 55%;
+        top: 75%;
         left: 50%;
         border-radius: 10px;
         backdrop-filter: blur(10px);
