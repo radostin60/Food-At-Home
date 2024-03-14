@@ -52,6 +52,7 @@ namespace Food_At_Home.Controllers
                 Email = model.Email,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
+                Address = model.Address
 
             };
 
@@ -82,7 +83,7 @@ namespace Food_At_Home.Controllers
 
             return View(model);
         }
-
+        
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel model)

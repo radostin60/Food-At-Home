@@ -30,5 +30,9 @@ namespace Food_At_Home.Data.Models
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; } = null!;
 
+        [Required]
+        [StringLength(100)]
+        public string Address { get; set; } = null!;
+
     }
 }
