@@ -13,7 +13,7 @@ namespace Food_At_Home.Services
             _context = context;
         }
 
-        public async Task<Dish> CreateDishAsync(CreateDishViewModel model)
+        /*  public async Task<Dish> CreateDishAsync(CreateDishViewModel model)
         {
             var dish = new Dish
             {
@@ -31,6 +31,6 @@ namespace Food_At_Home.Services
             await _context.SaveChangesAsync();
 
             return dish;
-        }
+        }  */
     }
 }
