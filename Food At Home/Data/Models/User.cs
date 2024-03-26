@@ -19,6 +19,6 @@ namespace Food_At_Home.Data.Models
         [Required]
         public string Address { get; set; } = null!;
 
-        public string? ImgageUrl { get; set; }
+        public string? ImageUrl { get; set; }
     }
 }

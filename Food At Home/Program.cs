@@ -1,7 +1,9 @@
+using CloudinaryDotNet;
 using Food_At_Home.Data;
 using Food_At_Home.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Principal;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +28,8 @@ builder.Services.ConfigureApplicationCookie(opt =>
 {
     opt.LoginPath = "/User/Login";
 });
+
+ConfigureCloudaryService(builder.Services, builder.Configuration);
 
 var app = builder.Build();
 
@@ -55,3 +59,17 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.Run();
+ static void ConfigureCloudaryService(IServiceCollection services, IConfiguration configuration)
+{
+
+    var cloudName = configuration.GetValue<string>("AccountSettings:CloudName");
+    var apiKey = configuration.GetValue<string>("AccountSettings:ApiKey");
+    var apiSecret = configuration.GetValue<string>("AccountSettings:ApiSecret");
+
+    if (new[] { cloudName, apiKey, apiSecret }.Any(string.IsNullOrWhiteSpace))
+    {
+        throw new ArgumentException("Please specify your Cloudinary account Information");
+    }
+
+    services.AddSingleton(new Cloudinary(new Account(cloudName, apiKey, apiSecret)));
+}
