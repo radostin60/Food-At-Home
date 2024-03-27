@@ -16,6 +16,7 @@ namespace Food_At_Home.Data.Models
         public Guid Id { get; set; }
 
         [Required]
+        [StringLength(20)]
         public string Name { get; set; } = null!;
 
         [ForeignKey(nameof(Category))]
@@ -23,6 +24,7 @@ namespace Food_At_Home.Data.Models
         public Category Category { get; set; } = null!;
 
         [Required]
+        [StringLength(100)]
         public string Ingredients { get; set; } = null!;
         public string? Description { get; set; }
 

@@ -1,36 +1,76 @@
 ﻿using Food_At_Home.Contracts;
 using Food_At_Home.Data;
 using Food_At_Home.Data.Models;
+using Food_At_Home.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Food_At_Home.Services
 {
     public class DishService: IDishService
     {
         private readonly FoodDbContext _context;
+        private readonly IImageService imageService;
 
         public DishService(FoodDbContext context)
         {
             _context = context;
         }
 
-        /*  public async Task<Dish> CreateDishAsync(CreateDishViewModel model)
+        public async Task AddDish(Guid restaurantId, CreateDishViewModel model)
         {
-            var dish = new Dish
+
+            Dish dish = new Dish
             {
                 Name = model.Name,
-                CategoryId = model.CategoryId,
-                Ingredients = model.Ingredients,
-                Description = model.Description,
                 Price = model.Price,
-                ImageUrl = model.ImageUrl,
-                RestaurantId = model.RestaurantId,
-                Quantity = model.Quantity
+                Description = model.Description,
+                Ingredients = model.Ingredients,
+                CategoryId = model.CategoryId,
+                Quantity = model.Quantity,
+                RestaurantId = restaurantId
             };
 
-            _context.Dishes.Add(dish);
+            if (model.ImageUrl != null)
+            {
+                dish.ImageUrl = await imageService.UploadImage(model.ImageUrl, "images", dish);
+
+            }
+
+
+            await _context.AddAsync(dish);
             await _context.SaveChangesAsync();
 
-            return dish;
-        }  */
+
+        }
+
+        public async Task EditDish(Guid dishId, CreateDishViewModel model)
+        {
+            var dish = await _context.Dishes
+                .FirstOrDefaultAsync(d => d.Id == dishId);
+
+            dish.Name = model.Name;
+            dish.Description = model.Description;
+            dish.CategoryId = model.CategoryId;
+            dish.Ingredients = model.Ingredients;
+            dish.Quantity = model.Quantity;
+            dish.Price = model.Price;
+
+            if (model.ImageUrl != null)
+                dish.ImageUrl = await imageService.UploadImage(model.ImageUrl, "images", dish);
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task Delete(int dishId)
+        {
+            var dish = await _context.Dishes
+                .FirstOrDefaultAsync();
+
+
+            await _context.SaveChangesAsync();
+
+        }
+
+
     }
 }
