@@ -1,4 +1,4 @@
-﻿namespace Food_At_Home.Models
+﻿namespace Food_At_Home.Models.Order
 {
     public class OrderViewModel
     {
@@ -21,7 +21,7 @@
 
         public string Status { get; set; } = null!;
 
-       // public ICollection<OrderedDishInfo> Dishes { get; set; }
+        // public ICollection<OrderedDishInfo> Dishes { get; set; }
     }
 }
 

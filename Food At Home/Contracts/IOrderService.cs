@@ -1,4 +1,4 @@
-﻿using Food_At_Home.Models;
+﻿using Food_At_Home.Models.Order;
 
 namespace Food_At_Home.Contracts
 {

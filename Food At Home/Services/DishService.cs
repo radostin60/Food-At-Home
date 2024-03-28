@@ -1,7 +1,7 @@
 ﻿using Food_At_Home.Contracts;
 using Food_At_Home.Data;
 using Food_At_Home.Data.Models;
-using Food_At_Home.Models;
+using Food_At_Home.Models.Dish;
 using Microsoft.EntityFrameworkCore;
 
 namespace Food_At_Home.Services

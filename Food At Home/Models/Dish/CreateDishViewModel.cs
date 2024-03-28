@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
-namespace Food_At_Home.Models
+namespace Food_At_Home.Models.Dish
 {
     public class CreateDishViewModel
     {
         public CreateDishViewModel()
         {
-            this.Categories = new List<DishCategoryModel>();
+            Categories = new List<DishCategoryModel>();
         }
 
         [Required]

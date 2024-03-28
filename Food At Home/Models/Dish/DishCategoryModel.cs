@@ -1,4 +1,4 @@
-﻿namespace Food_At_Home.Models
+﻿namespace Food_At_Home.Models.Dish
 {
     public class DishCategoryModel
     {

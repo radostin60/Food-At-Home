@@ -12,9 +12,10 @@ namespace Food_At_Home.Services
         private readonly FoodDbContext context;
 
         public ImageService(
-            Cloudinary cloudinary)
+            Cloudinary cloudinary, FoodDbContext _context)
         {
             this.cloudinary = cloudinary;
+            this.context = _context;
         }
         public async Task<string> UploadImage(IFormFile imageFile, string nameFolder, Dish dish)
         {

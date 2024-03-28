@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Food_At_Home.Models
+namespace Food_At_Home.Models.Order
 {
     public class OrderFormModel
     {
         public OrderFormModel()
         {
-            this.DishesForOrder = new List<OrderDishView>();
+            DishesForOrder = new List<OrderDishView>();
 
         }
         [StringLength()]

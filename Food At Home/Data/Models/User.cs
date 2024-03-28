@@ -6,17 +6,15 @@ namespace Food_At_Home.Data.Models
     public class User:IdentityUser<Guid>
     {
         [Required]
-        [StringLength(20)]
-        public string FirstName { get; set; } = null!;
+        [StringLength(30)]
+        public string Name { get; set; } = null!;
 
         [Required]
-        [StringLength(20)]
-        public string LastName { get; set; } = null!;
-
-        [Required]
+        [StringLength(30)]
         public string City { get; set; } = null!;
 
         [Required]
+        [StringLength(80)]
         public string Address { get; set; } = null!;
 
         public string? ImageUrl { get; set; }
