@@ -61,15 +61,47 @@ namespace Food_At_Home.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task Delete(int dishId)
+        public async Task<bool> ExistsById(Guid dishId)
         {
             var dish = await _context.Dishes
+                .FirstOrDefaultAsync(d => d.Id == dishId);
+
+            return dish != null;
+
+
+
+        }
+
+        public async Task Delete(Guid dishId)
+        {
+            var dish = await _context.Dishes
+                .Where(d => d.Id == dishId)
                 .FirstOrDefaultAsync();
 
 
             await _context.SaveChangesAsync();
 
         }
+
+        public async Task<PreDeleteDishViewModel> DishForDeleteById(Guid dishId)
+        {
+            var dish = await _context.Dishes
+                .Where(d => d.Id == dishId)
+                .Select(d => new PreDeleteDishViewModel()
+                {
+                    Id = d.Id,
+                    Name = d.Name,
+                    Ingredients = d.Ingredients,
+                    ImageUrl = d.DishUrlImage
+                })
+                .FirstOrDefaultAsync();
+
+            return dish!;
+
+
+        }
+
+
 
 
     }

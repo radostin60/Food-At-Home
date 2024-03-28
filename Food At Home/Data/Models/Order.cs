@@ -15,6 +15,10 @@ namespace Food_At_Home.Data.Models
         public string Status { get; set; } = null!;
 
         [Required]
+        [StringLength(50)]
+        public string Address { get; set; } = null!;
+ 
+        [Required]
         [ForeignKey(nameof(Restaurant))]
         public Guid RestaurantId { get; set; }
         public Restaurant Restaurant { get; set; } = null!;

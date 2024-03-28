@@ -62,9 +62,9 @@ app.Run();
  static void ConfigureCloudaryService(IServiceCollection services, IConfiguration configuration)
 {
 
-    var cloudName = configuration.GetValue<string>("AccountSettings:CloudName");
-    var apiKey = configuration.GetValue<string>("AccountSettings:ApiKey");
-    var apiSecret = configuration.GetValue<string>("AccountSettings:ApiSecret");
+    var cloudName = configuration.GetValue<string>("CloudinarySettings:CloudName");
+    var apiKey = configuration.GetValue<string>("CloudinarySettings:ApiKey");
+    var apiSecret = configuration.GetValue<string>("CloudinarySettings:ApiSecret");
 
     if (new[] { cloudName, apiKey, apiSecret }.Any(string.IsNullOrWhiteSpace))
     {
