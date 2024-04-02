@@ -60,10 +60,10 @@ namespace Food_At_Home.Services
                 .Select(r => r.Id)
                 .FirstOrDefaultAsync();
 
-            if (restaurantId == null)
-            {
-                throw new NullReferenceException("This restaurant doesn't exists");
-            }
+            //if (restaurantId == null)
+            //{
+              //  throw new NullReferenceException("This restaurant doesn't exists");
+            //}
 
             return restaurantId.ToString();
         }
