@@ -2,8 +2,8 @@
 {
     public interface ICustomerService
     {
-        Task Create(string userId);
+        Task Create(Guid userId);
 
-        Task<string?> GetCustomerId(string userId);
+        Task<Guid?> GetCustomerId(Guid userId);
     }
 }

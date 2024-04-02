@@ -3,27 +3,29 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Food_At_Home.Models.Dish
 {
-    public class CreateDishViewModel
+    public class DishFormModel
     {
-        public CreateDishViewModel()
+        public DishFormModel()
         {
-            Categories = new List<DishCategoryModel>();
+            this.Categories = new List<DishCategoryModel>();
         }
 
         [Required]
         [StringLength(20)]
         public string Name { get; set; } = null!;
 
+        [Required]
+        [StringLength(600)]
         public string Description { get; set; } = null!;
 
         [Required]
-        [StringLength(100)]
+        [StringLength(500)]
         public string Ingredients { get; set; } = null!;
 
         public IFormFile? ImageUrl { get; set; }
 
-        [Precision(18, 2)]
-        public decimal Price { get; set; }
+        [Precision(3, 2)]
+        public decimal Price { get; set; } 
 
         public int Quantity { get; set; }
 

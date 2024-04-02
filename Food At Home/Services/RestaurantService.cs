@@ -53,7 +53,7 @@ namespace Food_At_Home.Services
             return restaurant;
         }
 
-        public async Task<string> GetRestaurantId(Guid id)
+        public async Task<Guid> GetRestaurantId(Guid id)
         {
             var restaurantId = await context.Restaurants
                 .Where(r => r.UserId == id || r.Id == id)
@@ -62,10 +62,10 @@ namespace Food_At_Home.Services
 
             //if (restaurantId == null)
             //{
-              //  throw new NullReferenceException("This restaurant doesn't exists");
+            //  throw new NullReferenceException("This restaurant doesn't exists");
             //}
 
-            return restaurantId.ToString();
+            return restaurantId;
         }
 
         public async Task<List<RestaurantViewModel>> GetRestaurantsAsync()

@@ -66,7 +66,7 @@ namespace Food_At_Home.Services
             if (IsRestaurant)
             {
 
-                var restaurantId = await restaurantService.GetRestaurantId(userId.ToString());
+                var restaurantId = await restaurantService.GetRestaurantId(userId);
                 var orders = await orderService.GetOrdersIdByRestaurantId(restaurantId);
                 var restaurant = await restaurantService.GetRestaurantById(restaurantId);
 
@@ -77,7 +77,7 @@ namespace Food_At_Home.Services
             }
             else
             {
-                profile.OrdersCount = await orderService.GetOrdersCountByUserId(userId.ToString());
+                profile.OrdersCount = await orderService.GetOrdersCountByUserId(userId);
             }
 
             return profile;

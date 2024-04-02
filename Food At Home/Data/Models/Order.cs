@@ -38,6 +38,12 @@ namespace Food_At_Home.Data.Models
 
         public Payment? Payment { get; set; }
 
+        [Required]
+        [ForeignKey(nameof(Customer))]
+        public Guid CustomerId { get; set; } 
+
+        public Customer Customer { get; set; } = null!;
+
         public virtual ICollection<OrderDish> Dishes { get; set; } = null!;
 
 

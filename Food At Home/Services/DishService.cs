@@ -11,12 +11,13 @@ namespace Food_At_Home.Services
         private readonly FoodDbContext _context;
         private readonly IImageService imageService;
 
-        public DishService(FoodDbContext context)
+        public DishService(FoodDbContext context, IImageService _imageService)
         {
             _context = context;
+            imageService = _imageService;
         }
 
-        public async Task AddDish(Guid restaurantId, CreateDishViewModel model)
+        public async Task AddDish(Guid restaurantId, DishFormModel model)
         {
 
             Dish dish = new Dish
@@ -43,7 +44,7 @@ namespace Food_At_Home.Services
 
         }
 
-        public async Task EditDish(Guid dishId, CreateDishViewModel model)
+        public async Task EditDish(Guid dishId, DishFormModel model)
         {
             var dish = await _context.Dishes
                 .FirstOrDefaultAsync(d => d.Id == dishId);
@@ -92,7 +93,7 @@ namespace Food_At_Home.Services
                     Id = d.Id,
                     Name = d.Name,
                     Ingredients = d.Ingredients,
-                    ImageUrl = d.DishUrlImage
+                    ImageUrl = d.ImageUrl
                 })
                 .FirstOrDefaultAsync();
 
@@ -101,6 +102,90 @@ namespace Food_At_Home.Services
 
         }
 
+        public async Task<List<string>> AllDishesImagesByRestaurantId(Guid restaurantId)
+        {
+            var dishes = await _context.Dishes
+                .Where(rd => rd.RestaurantId == restaurantId)
+                .Select(rd => rd.ImageUrl)
+                .ToListAsync();
+
+            return dishes!;
+
+        }
+
+        public async Task<DishFormModel?> GetDishById(Guid id)
+        {
+            var dish = await _context.Dishes
+                .Where(rd => rd.Id == id && rd.Quantity > 0)
+                .Select(rd => new DishFormModel()
+                {
+                    Name = rd.Name,
+                    Description = rd.Description,
+                    Ingredients = rd.Ingredients,
+                    Price = rd.Price,
+                    ImageUrl = null,
+                    Quantity = rd.Quantity,
+                    CategoryId = rd.CategoryId
+
+                })
+                .FirstOrDefaultAsync();
+
+            return dish;
+        }
+
+        public async Task<bool> IsRestaurantOwnerToDish(Guid dishId, Guid restaurantId)
+        {
+            var dish = await _context.Dishes
+                .FirstOrDefaultAsync(d => d.Id == dishId);
+
+            if (dish == null)
+            {
+                return false;
+            }
+
+            return dish.RestaurantId == restaurantId;
+        }
+
+        public async Task<OrderDishView?> GetDishForOrderById(Guid id)
+        {
+            var dish = await _context.Dishes
+                .Where(d => d.Id == id)
+                .Select(d => new OrderDishView()
+                {
+                    Id = d.Id,
+                    ImageUrl = d.ImageUrl,
+                    Name = d.Name,
+                    Ingredients = d.Ingredients,
+                    Price = d.Price,
+                    Quantity = 1,
+                    RestaurantId = d.RestaurantId
+                })
+                .FirstOrDefaultAsync();
+
+            return dish;
+        }
+
+        public async Task<List<DishViewModel>> GetDishesByRestaurantId(Guid restaurantId)
+        {
+            var dihes = await _context.Dishes
+                .Where(rd => rd.RestaurantId == restaurantId && rd.Quantity > 0)
+                .Select(rd => new DishViewModel()
+                {
+                    Id = rd.Id,
+                    Name = rd.Name,
+                    Description = rd.Description,
+                    Ingredients = rd.Ingredients,
+                    Price = rd.Price,
+                    DishImageUrl = rd.ImageUrl, 
+                    RestaurantUserId = rd.Restaurant.UserId
+                })
+                .ToListAsync();
+
+            return dihes!;
+        }
+
+        
+        ///////TO DO --- Cart And Filter
 
 
 

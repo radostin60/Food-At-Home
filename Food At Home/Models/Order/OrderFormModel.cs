@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Food_At_Home.Models.Dish;
+using System.ComponentModel.DataAnnotations;
 
 namespace Food_At_Home.Models.Order
 {
@@ -9,17 +10,17 @@ namespace Food_At_Home.Models.Order
             DishesForOrder = new List<OrderDishView>();
 
         }
-        [StringLength()]
+        [StringLength(60)]
         public string Address { get; set; } = null!;
 
 
-        [StringLength()]
+        [StringLength(20)]
         public string City { get; set; }
 
         public ICollection<OrderDishView> DishesForOrder { get; set; }
 
-        public string RestaurantId { get; set; }
+        public Guid RestaurantId { get; set; }
 
-        public string PaymentId { get; set; }
+        public Guid PaymentId { get; set; }
     }
 }
