@@ -76,11 +76,10 @@ namespace Food_At_Home.Services
         public async Task Delete(Guid dishId)
         {
             var dish = await _context.Dishes
-                .Where(d => d.Id == dishId)
-                .FirstOrDefaultAsync();
+                .FirstAsync(d => d.Id == dishId);
 
-
-            await _context.SaveChangesAsync();
+            this._context.Remove(dish);
+            await this._context.SaveChangesAsync();
 
         }
 

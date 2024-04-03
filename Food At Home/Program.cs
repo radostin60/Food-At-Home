@@ -21,6 +21,7 @@ builder.Services.AddDefaultIdentity<User>(options =>
     options.Password.RequireUppercase = false;
     options.Password.RequireNonAlphanumeric = false;
 })
+    .AddRoles<IdentityRole<Guid>>()
     .AddEntityFrameworkStores<FoodDbContext>();
 builder.Services.AddControllersWithViews();
 
