@@ -1,11 +1,12 @@
-﻿using Food_At_Home.Data;
+﻿using Food_At_Home.Contracts;
+using Food_At_Home.Data;
 using Food_At_Home.Data.Models;
 using Food_At_Home.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Food_At_Home.Services
 {
-    public class PaymentService
+    public class PaymentService: IPaymentService
     {
         private readonly FoodDbContext context;
 

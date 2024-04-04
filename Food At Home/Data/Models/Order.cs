@@ -27,7 +27,7 @@ namespace Food_At_Home.Data.Models
         public DateTime OrderTime { get; set; }
 
         [Required]
-        public DateTime DeliveryTime { get; set; }
+        public DateTime? DeliveryTime { get; set; }
 
         [Required]
         [Precision(4,2)]

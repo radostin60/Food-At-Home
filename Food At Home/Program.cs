@@ -1,6 +1,8 @@
 using CloudinaryDotNet;
+using Food_At_Home.Contracts;
 using Food_At_Home.Data;
 using Food_At_Home.Data.Models;
+using Food_At_Home.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Principal;
@@ -12,6 +14,15 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultSchoolC
 builder.Services.AddDbContext<FoodDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<IDishService, DishService>();
+builder.Services.AddScoped<IImageService, ImageService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
+builder.Services.AddScoped<IProfileService, ProfileService>();
+builder.Services.AddScoped<IRestaurantService, RestaurantService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddDefaultIdentity<User>(options =>
 {

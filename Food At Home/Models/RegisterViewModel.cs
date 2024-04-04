@@ -5,16 +5,12 @@ namespace Food_At_Home.Data.Models
     public class RegisterViewModel
     {
         [Required]
-        [StringLength(20)]
-        public string FirstName { get; set; } = null!;
-
-        [Required]
-        [StringLength(20)]
-        public string LastName { get; set; } = null!;
+        [StringLength(50)]
+        public string Name { get; set; } = null!;
 
         [Required]
         [StringLength(20, MinimumLength = 5)]
-        public string UserName { get; set; } = null!;
+        public string Username { get; set; } = null!;
 
         [Required]
         [EmailAddress]

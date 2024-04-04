@@ -4,8 +4,8 @@ namespace Food_At_Home.Contracts
 {
     public interface IProfileService
     {
-        Task<ProfileViewModel> MyProfile(string userId, bool IsRestaurant);
+        Task<ProfileViewModel> MyProfile(Guid userId, bool IsRestaurant);
 
-        Task Edit(string userId, EditProfileModel model);
+        Task Edit(Guid userId, EditProfileModel model);
     }
 }

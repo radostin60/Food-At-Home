@@ -22,13 +22,51 @@ namespace Food_At_Home.Configurations
                 Id = Guid.Parse("2341fe11-cd36-40c1-b5e4-5c5831ee501d"),
                 UserName = "radostin1",
                 Email = "radostin1@abv.bg",
-                PhoneNumber = "0887399847",
+                PhoneNumber = "0877311440",
                 Name = "Radostin Dimitrov",
                 City = "Kazanlak",
                 Address = "Mazalat 16",
                 ImageUrl = ""
             };
+
+            user.PasswordHash = passwordHasher.HashPassword(user, "12345678");
+            users.Add(user);
+
+            var user2 = new User()
+            {
+                Id = Guid.Parse("b7892962-0426-48de-bd62-8ca55ebe930e"),
+                UserName = "dominos",
+                Email = "dominos@abv.bg",
+                PhoneNumber = "0882759837",
+                Name = "Domino's Pizza",
+                City = "Kazanlak",
+                Address = "Al. Batenberg 46",
+                ImageUrl = ""
+            };
+
+            user.PasswordHash = passwordHasher.HashPassword(user2, "12345678");
+            users.Add(user2);
+
+            var user3 = new User()
+            {
+                Id = Guid.Parse("1188c17d-0b5b-4041-90eb-6f1bdfbc6d71"),
+                UserName = "admin",
+                Email = "admin@abv.bg",
+                PhoneNumber = "0891231234",
+                Name = "Admin Account",
+                City = "Kazanlak",
+                Address = "6-ti Septemvri 9",
+                ImageUrl = ""
+            };
+
+            user.PasswordHash = passwordHasher.HashPassword(user3, "12345678");
+            users.Add(user3);
+
+            return users;
+
         }
+
+       
 
     }
 }
