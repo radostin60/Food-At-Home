@@ -2,6 +2,7 @@
 using Food_At_Home.Extensions;
 using Food_At_Home.Models.Order;
 using Microsoft.AspNetCore.Mvc;
+using Food_At_Home.Notifications;
 
 namespace Food_At_Home.Controllers
 {
@@ -37,7 +38,7 @@ namespace Food_At_Home.Controllers
             if (isRestaurant)
             {
                 Guid? rId = await restaurantService.GetRestaurantId(userId);
-                //TempData[ErrorMessage] = "You should be a client to order a dish";
+                TempData[ErrorMessage] = "You should be a client to order a dish";
 
                 return RedirectToAction("Menu", "Dish", new { id = rId });
             }
@@ -61,11 +62,11 @@ namespace Food_At_Home.Controllers
         [HttpPost]
         public async Task<IActionResult> Order(OrderFormModel model)
         {
-
-            bool isRestaurant = await restaurantService.ExistsById(User.GetId());
+            Guid userId = (Guid)User.GetId()!;
+            bool isRestaurant = await restaurantService.ExistsById(userId);
             if (isRestaurant)
             {
-                Guid rId = await restaurantService.GetRestaurantId(User.GetId());
+                Guid rId = await restaurantService.GetRestaurantId(userId);
                 TempData[ErrorMessage] = "You should be a client to order a dish";
 
                 return RedirectToAction("Menu", "Dish", new { id = rId });

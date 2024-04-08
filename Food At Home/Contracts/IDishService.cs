@@ -22,7 +22,7 @@ namespace Food_At_Home.Contracts
 
         Task<PreDeleteDishViewModel> DishForDeleteById(Guid dishId);
 
-        Task<AllDishesFilteredAndPages> DishesFiltered(DishesQueryModel model, string id);
+        Task<AllDishesFilteredAndPages> DishesFiltered(DishesQueryModel model, Guid id);
         Task<AllDishesFilteredAndPages> AllDishesFiltered(DishesQueryModel model);
 
         Task<OrderDishView?> GetDishForOrderById(Guid id);

@@ -1,6 +1,7 @@
 ﻿using Food_At_Home.Contracts;
 using Food_At_Home.Data;
 using Food_At_Home.Data.Models;
+using Food_At_Home.Data.Models.Enums;
 using Food_At_Home.Models.Dish;
 using Microsoft.EntityFrameworkCore;
 
@@ -183,10 +184,100 @@ namespace Food_At_Home.Services
             return dihes!;
         }
 
-        
-        ///////TO DO --- Cart And Filter
+
+        public async Task<AllDishesFilteredAndPages> DishesFiltered(DishesQueryModel model, Guid id)
+        {
+            IQueryable<Dish> dishesQuery = _context.Dishes
+                .Where(d => d.RestaurantId == id);
+
+            if (!string.IsNullOrEmpty(model.Category))
+            {
+                dishesQuery = dishesQuery
+                    .Where(d => d.Category.Name == model.Category);
+            }
+
+            
+
+            dishesQuery = model.DishSorting switch
+            {
+                DishSorting.Name => dishesQuery.OrderBy(d => d.Name),
+                DishSorting.PriceAscending => dishesQuery.OrderBy(d => d.Price),
+                DishSorting.PriceDescending => dishesQuery.OrderByDescending(d => d.Price),
+                DishSorting.IngredientsAscending => dishesQuery.OrderBy(d => d.Ingredients),
+                DishSorting.IngredientsDescending => dishesQuery.OrderByDescending(d => d.Ingredients)
 
 
+            };
+
+            IEnumerable<DishViewModel> dishModel = await dishesQuery
+                .Skip((model.CurrentPage - 1) * model.DishesPerPage)
+                .Take(model.DishesPerPage)
+                .Select(d => new DishViewModel()
+                {
+                    Id = d.Id,
+                    Name = d.Name,
+                    Ingredients = d.Ingredients,
+                    Description = d.Description,
+                    Price = d.Price,
+                    DishImageUrl = d.ImageUrl,
+                    RestaurantUserId = d.Restaurant.UserId
+                })
+                .ToListAsync();
+
+            int totalDishes = dishesQuery.Count();
+
+            return new AllDishesFilteredAndPages()
+            {
+                Dishes = dishModel,
+                TotalDishes = totalDishes
+            };
+        }
+
+        public async Task<AllDishesFilteredAndPages> AllDishesFiltered(DishesQueryModel model)
+        {
+            IQueryable<Dish> dishesQuery = _context.Dishes;
+
+            if (!string.IsNullOrEmpty(model.Category))
+            {
+                dishesQuery = dishesQuery
+                    .Where(d => d.Category.Name == model.Category);
+            }
+
+           
+
+            dishesQuery = model.DishSorting switch
+            {
+                DishSorting.Name => dishesQuery.OrderBy(d => d.Name),
+                DishSorting.PriceAscending => dishesQuery.OrderBy(d => d.Price),
+                DishSorting.PriceDescending => dishesQuery.OrderByDescending(d => d.Price),
+                DishSorting.IngredientsAscending => dishesQuery.OrderBy(d => d.Ingredients),
+                DishSorting.IngredientsDescending => dishesQuery.OrderByDescending(d => d.Ingredients)
+
+
+            };
+
+            IEnumerable<DishViewModel> dishModel = await dishesQuery
+                .Skip((model.CurrentPage - 1) * model.DishesPerPage)
+                .Take(model.DishesPerPage)
+                .Select(d => new DishViewModel()
+                {
+                    Id = d.Id,
+                    Name = d.Name,
+                    Ingredients = d.Ingredients,
+                    Description = d.Description,
+                    Price = d.Price,
+                    DishImageUrl = d.ImageUrl,
+                    RestaurantUserId = d.Restaurant.UserId
+                })
+                .ToListAsync();
+            int totalDishes = dishesQuery.Count();
+
+            return new AllDishesFilteredAndPages()
+            {
+                Dishes = dishModel,
+                TotalDishes = totalDishes
+            };
+        }
 
     }
 }
