@@ -48,10 +48,9 @@ namespace Food_At_Home.Controllers
 
             var user = new User() {
                 
-                UserName = model.UserName, 
+                UserName = model.Username, 
                 Email = model.Email,
-                FirstName = model.FirstName,
-                LastName = model.LastName,
+                Name = model.Name,
                 Address = model.Address
 
             };
