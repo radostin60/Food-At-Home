@@ -1,7 +1,10 @@
 ﻿using Food_At_Home.Contracts;
+using Food_At_Home.Extensions;
+using Food_At_Home.Models.Dish;
 using Food_At_Home.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static Food_At_Home.Notifications.NotificationConstants;
 
 namespace Food_At_Home.Controllers
 {
@@ -43,7 +46,7 @@ namespace Food_At_Home.Controllers
             {
                 var restaurantId = await restaurantService.GetRestaurantId(id);
 
-                AllDishesFilteredAndPages serviceModel = await dishService.DishesFiltered(model, restaurantId);
+                AllDishesFilteredAndPages serviceModel = await dishService.DishesFiltered(model, (Guid)restaurantId);
 
                 model.Dishes = serviceModel.Dishes;
                 model.TotalDishes = serviceModel.TotalDishes;
@@ -60,6 +63,53 @@ namespace Food_At_Home.Controllers
                 return RedirectToAction("All", "Restaurant");
             }
 
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Add()
+        {
+            bool isRestaurant = await restaurantService.ExistsById((Guid)User.GetId());
+            if (!isRestaurant)
+            {
+                TempData[ErrorMessage] = "You should be a restaurant to add a dish";
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            var model = new DishFormModel()
+            {
+                Categories = await categoryService.AllCategories()
+            };
+
+
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(DishFormModel model)
+        {
+            Guid userId = (Guid)User.GetId()!;
+
+            bool isRestaurant = await restaurantService.ExistsById((Guid)User.GetId());
+            if (!isRestaurant)
+            {
+                TempData[ErrorMessage] = "You should be a restaurant to add a dish";
+
+                return RedirectToAction("Index", "Home");
+            }
+            Guid restaurantId = (Guid)await restaurantService.GetRestaurantId(userId);
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            await dishService.AddDish(restaurantId, model);
+
+            this.TempData[SuccessMessage] = $"Successfully added dish {model.Name}";
+
+            return RedirectToAction("Menu", new { id = restaurantId });
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿    namespace Food_At_Home.Notifications
+﻿namespace Food_At_Home.Notifications
 {
     public static class NotificationConstants
     {

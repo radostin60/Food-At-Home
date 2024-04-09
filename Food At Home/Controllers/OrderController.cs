@@ -2,7 +2,7 @@
 using Food_At_Home.Extensions;
 using Food_At_Home.Models.Order;
 using Microsoft.AspNetCore.Mvc;
-using Food_At_Home.Notifications;
+using static Food_At_Home.Notifications.NotificationConstants;
 
 namespace Food_At_Home.Controllers
 {
@@ -66,7 +66,7 @@ namespace Food_At_Home.Controllers
             bool isRestaurant = await restaurantService.ExistsById(userId);
             if (isRestaurant)
             {
-                Guid rId = await restaurantService.GetRestaurantId(userId);
+                Guid rId = (Guid)await restaurantService.GetRestaurantId(userId);
                 TempData[ErrorMessage] = "You should be a client to order a dish";
 
                 return RedirectToAction("Menu", "Dish", new { id = rId });
@@ -85,8 +85,7 @@ namespace Food_At_Home.Controllers
 
                 model.DishesForOrder = dishService.GetCartDishes(username);
 
-
-                Guid customerId = await customerService.GetCustomerId(User.GetId());
+                Guid customerId = (Guid)await customerService.GetCustomerId(userId);
 
                 var orderId = await orderService.CreateOrder(model, customerId);
 
@@ -94,13 +93,13 @@ namespace Food_At_Home.Controllers
             }
             catch (Exception ex)
             {
-                //TempData[ErrorMessage] = ex.Message;
+                TempData[ErrorMessage] = ex.Message;
                 return View(model);
             }
 
             HttpContext.Session.Clear();
 
-            //TempData[SuccessMessage] = "Successfully placed order!";
+            TempData[SuccessMessage] = "Successfully placed order!";
             return RedirectToAction("UserOrders");
         }
 
