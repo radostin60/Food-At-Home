@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Food_At_Home.Extensions
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -23,6 +24,36 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            
+                            @if (User.IsInRole("Restaurant"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Dish" asp-action="Add">Add Dish</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Dish" asp-action="Menu" asp-route-id="@User.GetId()">Menu</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="RestaurantOrders">Orders</a>
+                                </li>
+                                
+                            }
+                            else if (User.IsInRole("Customer"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Restaurant" asp-action="All">All Restaurants</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="UserOrders">My Orders</a>
+                                </li>
+                                
+
+                            }
+
+                        }
+
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

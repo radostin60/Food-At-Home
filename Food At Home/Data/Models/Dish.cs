@@ -29,7 +29,7 @@ namespace Food_At_Home.Data.Models
         public string? Description { get; set; }
 
         [Required]
-        [Precision(3,2)]
+        [Precision(18,2)]
         public decimal  Price { get; set; }
 
         public string ImageUrl { get; set; } = null!;

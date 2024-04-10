@@ -29,7 +29,7 @@ namespace Food_At_Home.Configurations
                 City = "Kazanlak",
                 Address = "Mazalat 16",
                 SecurityStamp = Guid.NewGuid().ToString("D"),
-                ImageUrl = ""
+                ImageUrl = "https://res.cloudinary.com/dqtuni8ed/image/upload/v1712767712/xlnkbydge1fm49l1lvto.jpg"
             };
 
             user.PasswordHash = passwordHasher.HashPassword(user, "12345678");
@@ -47,7 +47,7 @@ namespace Food_At_Home.Configurations
                 City = "Kazanlak",
                 Address = "Al. Batenberg 46",
                 SecurityStamp = Guid.NewGuid().ToString("D"),
-                ImageUrl = ""
+                ImageUrl = "https://res.cloudinary.com/dqtuni8ed/image/upload/v1712766785/cu4hlsiiqarbuiejvc5g.png"
             };
 
             user2.PasswordHash = passwordHasher.HashPassword(user2, "11111111");
@@ -65,7 +65,7 @@ namespace Food_At_Home.Configurations
                 City = "Kazanlak",
                 Address = "6-ti Septemvri 9",
                 SecurityStamp = Guid.NewGuid().ToString("D"),
-                ImageUrl = ""
+                ImageUrl = "https://res.cloudinary.com/dqtuni8ed/image/upload/v1712767540/k1i32lmyp6du5abwwyot.jpg"
             };
 
             user3.PasswordHash = passwordHasher.HashPassword(user3, "22222222");

@@ -4,6 +4,7 @@ using Food_At_Home.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Food_At_Home.Migrations
 {
     [DbContext(typeof(FoodDbContext))]
-    partial class FoodDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240410165408_k")]
+    partial class k
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -119,8 +121,8 @@ namespace Food_At_Home.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<decimal>("Price")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(3, 2)
+                        .HasColumnType("decimal(3,2)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -267,7 +269,7 @@ namespace Food_At_Home.Migrations
                         new
                         {
                             Id = new Guid("ce604d6e-1a66-4059-9777-388cbc34ef84"),
-                            Description = "Welcome to Dominos Pizza! Where every meal is a journey of flavors and every moment is savored. We're delighted to have you dine with us today.  ",
+                            Description = "Welcome to Food At Home! Where every meal is a journey of flavors and every moment is savored. We're delighted to have you dine with us today. Sit back, relax, and get ready to indulge in culinary delights crafted just for you. Enjoy your time with us!",
                             UserId = new Guid("b7892962-0426-48de-bd62-8ca55ebe930e")
                         });
                 });
@@ -365,7 +367,7 @@ namespace Food_At_Home.Migrations
                             AccessFailedCount = 0,
                             Address = "Mazalat 16",
                             City = "Kazanlak",
-                            ConcurrencyStamp = "ac8c6835-9bee-4533-a23f-48832e168d13",
+                            ConcurrencyStamp = "ab30c4ec-2629-46e3-a4fb-6b1a95e8c5f8",
                             Email = "radostin1@abv.bg",
                             EmailConfirmed = false,
                             ImageUrl = "https://res.cloudinary.com/dqtuni8ed/image/upload/v1712767712/xlnkbydge1fm49l1lvto.jpg",
@@ -373,10 +375,10 @@ namespace Food_At_Home.Migrations
                             Name = "Radostin Dimitrov",
                             NormalizedEmail = "RADOSTIN1@ABV.BG",
                             NormalizedUserName = "RADOSTIN1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIt1l548cz99ym0EQN3wfkX1c6PIzG6e0DxvpvbWye0Gc1DunEKy7eV4Fw4tTz38ug==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFKrUUS/UYjQ4L9w5CYZuk6VBnI6Ei5g9jN9654vWAFQYuUpQt4489c+USZb1AdaAA==",
                             PhoneNumber = "0877311440",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "328dc6fb-4fac-4fa4-88bc-956bf21c442c",
+                            SecurityStamp = "ea7a490d-12a9-4c04-a205-87609a0856d9",
                             TwoFactorEnabled = false,
                             UserName = "radostin1"
                         },
@@ -386,7 +388,7 @@ namespace Food_At_Home.Migrations
                             AccessFailedCount = 0,
                             Address = "Al. Batenberg 46",
                             City = "Kazanlak",
-                            ConcurrencyStamp = "cd9e9428-015a-4b25-b6fe-78e54d3db512",
+                            ConcurrencyStamp = "f49e8eb3-2884-4b34-b1a6-aeaa533e2ddd",
                             Email = "dominos@abv.bg",
                             EmailConfirmed = false,
                             ImageUrl = "https://res.cloudinary.com/dqtuni8ed/image/upload/v1712766785/cu4hlsiiqarbuiejvc5g.png",
@@ -394,10 +396,10 @@ namespace Food_At_Home.Migrations
                             Name = "Domino's Pizza",
                             NormalizedEmail = "DOMINOS@ABV.BG",
                             NormalizedUserName = "DOMINOS",
-                            PasswordHash = "AQAAAAEAACcQAAAAEK1nwFbU7X6qdLofnLGTcr84GqkWdpeHsXebtWohfkI8YRb6Vv7Btywv4gSGZ/QDXw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMK3n8SnkDPOGie3I0IWXiiP739fFI3gv7zgnDJ3iiuEzbhpB3RTVd6MTDy9M+NlBQ==",
                             PhoneNumber = "0882759837",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "95af92fb-0595-46af-ad06-0ebd9af7d744",
+                            SecurityStamp = "5bc1d2e7-bf6e-4428-a280-154ae89e21f7",
                             TwoFactorEnabled = false,
                             UserName = "dominos"
                         },
@@ -407,7 +409,7 @@ namespace Food_At_Home.Migrations
                             AccessFailedCount = 0,
                             Address = "6-ti Septemvri 9",
                             City = "Kazanlak",
-                            ConcurrencyStamp = "a08dd00f-c126-48c9-a54d-5492cf11a20b",
+                            ConcurrencyStamp = "78180099-afdc-4b02-8700-2da3996a2cc5",
                             Email = "admin@abv.bg",
                             EmailConfirmed = false,
                             ImageUrl = "https://res.cloudinary.com/dqtuni8ed/image/upload/v1712767540/k1i32lmyp6du5abwwyot.jpg",
@@ -415,10 +417,10 @@ namespace Food_At_Home.Migrations
                             Name = "Admin Account",
                             NormalizedEmail = "ADMIN@ABV.BG",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJN6EjhfZBGmOJp3+CEZF7pzTiAKCZ6rhlZv5h0sG+zW3kReBbosR4owlMe6TLKAqA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHhIc4955XlZc18798zhGpqYArZ+JsJ/+jwdcoAsumSf8JXk0AfYetIBk+YDDZ+JoQ==",
                             PhoneNumber = "0891231234",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8bcd7f3d-4767-4a23-86b3-405ccfd2a355",
+                            SecurityStamp = "97347b38-e98a-4f4c-8496-5de23fd17cd2",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -455,21 +457,21 @@ namespace Food_At_Home.Migrations
                         new
                         {
                             Id = new Guid("1e1fd1db-4ee5-4933-a51a-ead302e6db41"),
-                            ConcurrencyStamp = "57d6a8ba-f624-44a8-ad30-bc0ff01092d9",
+                            ConcurrencyStamp = "04b1872e-28d5-47ad-985e-f0c4c455f9b6",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = new Guid("5534ff36-7149-4ffa-8581-16958c5f7d22"),
-                            ConcurrencyStamp = "3e7d64d8-a2a8-479c-a985-6acb9e3cdc37",
+                            ConcurrencyStamp = "cd2c92f2-8353-41df-bdbd-64d117ec7575",
                             Name = "Restaurant",
                             NormalizedName = "RESTAURANT"
                         },
                         new
                         {
                             Id = new Guid("d7a6c5ef-dbd7-4e21-bafc-258257e0894f"),
-                            ConcurrencyStamp = "178f906e-0d4b-4fdf-93f5-efc722efc73b",
+                            ConcurrencyStamp = "85e5dbb3-a61c-40b7-aab0-f49fda927577",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });

@@ -39,7 +39,7 @@ namespace Food_At_Home.Services
             }
 
 
-            await _context.AddAsync(dish);
+            _context.Dishes.Add(dish);
             await _context.SaveChangesAsync();
 
 

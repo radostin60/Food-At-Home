@@ -24,7 +24,7 @@ namespace Food_At_Home.Models.Dish
 
         public IFormFile? ImageUrl { get; set; }
 
-        [Precision(3, 2)]
+        [Precision(18, 2)]
         public decimal Price { get; set; } 
 
         public int Quantity { get; set; }
