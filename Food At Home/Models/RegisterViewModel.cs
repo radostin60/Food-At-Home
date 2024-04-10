@@ -30,5 +30,11 @@ namespace Food_At_Home.Data.Models
         [StringLength(100)]
         public string Address { get; set; } = null!;
 
+        [StringLength(20)]
+        public string? PhoneNumber { get; set; } 
+
+
+        public IFormFile? ImageUrl { get; set; }
+
     }
 }

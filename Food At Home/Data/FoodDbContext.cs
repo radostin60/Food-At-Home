@@ -1,4 +1,5 @@
-﻿using Food_At_Home.Data.Models;
+﻿using Food_At_Home.Configurations;
+using Food_At_Home.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -66,9 +67,16 @@ namespace Food_At_Home.Data
 
             //builder.Entity<Order>()
 
+            builder.ApplyConfiguration(new CategoryConfiguration());
+            builder.ApplyConfiguration(new UserConfiguration());
+            builder.ApplyConfiguration(new RolesConfiguration());
+            builder.ApplyConfiguration(new UserRolesConfiguration());
+            builder.ApplyConfiguration(new CustomerConfiguration());
+            builder.ApplyConfiguration(new RestaurantConfiguration());
 
 
-      
+
+
 
             base.OnModelCreating(builder);
 

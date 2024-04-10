@@ -10,9 +10,8 @@ namespace Food_At_Home.Data.Models
         public string Name { get; set; } = null!;
 
 
-        [Required]
         [StringLength(30)]
-        public string City { get; set; } = null!;
+        public string? City { get; set; } 
 
         [Required]
         [StringLength(80)]

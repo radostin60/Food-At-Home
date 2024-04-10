@@ -4,6 +4,7 @@ using Food_At_Home.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Food_At_Home.Migrations
 {
     [DbContext(typeof(FoodDbContext))]
-    partial class FoodDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240410070403_f")]
+    partial class f
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -287,6 +289,7 @@ namespace Food_At_Home.Migrations
                         .HasColumnType("nvarchar(80)");
 
                     b.Property<string>("City")
+                        .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
@@ -365,7 +368,7 @@ namespace Food_At_Home.Migrations
                             AccessFailedCount = 0,
                             Address = "Mazalat 16",
                             City = "Kazanlak",
-                            ConcurrencyStamp = "af654062-8efd-4131-a082-5a1807af911b",
+                            ConcurrencyStamp = "f0378873-dec1-465c-816b-de9a40c8b98b",
                             Email = "radostin1@abv.bg",
                             EmailConfirmed = false,
                             ImageUrl = "",
@@ -373,10 +376,9 @@ namespace Food_At_Home.Migrations
                             Name = "Radostin Dimitrov",
                             NormalizedEmail = "RADOSTIN1@ABV.BG",
                             NormalizedUserName = "RADOSTIN1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPoDcqsSVJZ/y+vSG2CnLz4pphF0wqOnjkOJIyeIoofmLtJFLb0AkBl4m78OkRTBxg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEo4MC9p9jN1q4B8A5e3qWYuFkUP/ItKDWCQqLRDBUqa031PvrLtjmpgHwJLwGenuw==",
                             PhoneNumber = "0877311440",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4b5dbe23-4c52-495e-af2f-8ca56a158a8b",
                             TwoFactorEnabled = false,
                             UserName = "radostin1"
                         },
@@ -386,7 +388,7 @@ namespace Food_At_Home.Migrations
                             AccessFailedCount = 0,
                             Address = "Al. Batenberg 46",
                             City = "Kazanlak",
-                            ConcurrencyStamp = "c95221d9-accd-4ce8-99e8-041715d30a65",
+                            ConcurrencyStamp = "851a617c-3274-422d-aa4f-58007b2a1297",
                             Email = "dominos@abv.bg",
                             EmailConfirmed = false,
                             ImageUrl = "",
@@ -394,10 +396,9 @@ namespace Food_At_Home.Migrations
                             Name = "Domino's Pizza",
                             NormalizedEmail = "DOMINOS@ABV.BG",
                             NormalizedUserName = "DOMINOS",
-                            PasswordHash = "AQAAAAEAACcQAAAAEB3aVMx7Z3s2icIcJoFVV5kXeyF3Cf3dU/4cEX3UwTRn9lZLDho9ebHQGxC4ZI/pUw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJ/M3myWCzmi/+M61A1QY1nJBPC6eyW2GdLI42ZFrsEYGxXjGQS9S1WVXC0NOva/9Q==",
                             PhoneNumber = "0882759837",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "db159ed6-65ca-4562-9134-22a4a17c82a7",
                             TwoFactorEnabled = false,
                             UserName = "dominos"
                         },
@@ -407,7 +408,7 @@ namespace Food_At_Home.Migrations
                             AccessFailedCount = 0,
                             Address = "6-ti Septemvri 9",
                             City = "Kazanlak",
-                            ConcurrencyStamp = "3c6916d2-26f7-49d4-9f2b-7bcbae29f99a",
+                            ConcurrencyStamp = "db37c85a-14ff-4c72-b340-7c98409f47be",
                             Email = "admin@abv.bg",
                             EmailConfirmed = false,
                             ImageUrl = "",
@@ -415,10 +416,9 @@ namespace Food_At_Home.Migrations
                             Name = "Admin Account",
                             NormalizedEmail = "ADMIN@ABV.BG",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHEDdTX8zh+B/oUJZbPkRxf+4DBXkImuMZsDMDgxbhxr4h3Q6NeWYu3Xm/DgJKlUMQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFUl6x/cSFln15FwAz7Bfy3+u24nL8jS1qhg4nfRpbqcRKqBDesA8Baad0rHCb+vbw==",
                             PhoneNumber = "0891231234",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "26f993b0-e84e-48a2-a774-b45f3dda7942",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -455,23 +455,20 @@ namespace Food_At_Home.Migrations
                         new
                         {
                             Id = new Guid("1e1fd1db-4ee5-4933-a51a-ead302e6db41"),
-                            ConcurrencyStamp = "2025b82f-4c32-4b33-8798-58e4c5e59fd6",
-                            Name = "Administrator",
-                            NormalizedName = "ADMINISTRATOR"
+                            ConcurrencyStamp = "10e0e91a-b2ca-4705-ad59-e3875e9083c8",
+                            Name = "Administrator"
                         },
                         new
                         {
                             Id = new Guid("5534ff36-7149-4ffa-8581-16958c5f7d22"),
-                            ConcurrencyStamp = "498d41e0-f73b-4e23-9afd-11c8517f6b28",
-                            Name = "Restaurant",
-                            NormalizedName = "RESTAURANT"
+                            ConcurrencyStamp = "c742b7ed-c7e0-4060-a4fb-3eb510657084",
+                            Name = "Restaurant"
                         },
                         new
                         {
                             Id = new Guid("d7a6c5ef-dbd7-4e21-bafc-258257e0894f"),
-                            ConcurrencyStamp = "7d3d883d-acf4-46eb-9a70-6ac4cb530a58",
-                            Name = "Customer",
-                            NormalizedName = "CUSTOMER"
+                            ConcurrencyStamp = "bf23fd8a-31e8-44ab-9f3e-d47d8e28ce32",
+                            Name = "Customer"
                         });
                 });
 

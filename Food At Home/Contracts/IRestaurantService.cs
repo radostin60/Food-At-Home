@@ -8,7 +8,7 @@ namespace Food_At_Home.Contracts
 
         Task<RestaurantDetailsViewModel?> GetRestaurantById(Guid id);
 
-        Task<Guid?> GetRestaurantId(Guid userId);
+        Task<Guid> GetRestaurantId(Guid userId);
 
         Task<bool> ExistsById(Guid userId);
 

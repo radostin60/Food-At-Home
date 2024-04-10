@@ -51,16 +51,15 @@ namespace Food_At_Home.Services
         public async Task<UserModel?> GetAdmin()
         {
             var admin = await context.Users
-                .Where(u => u.Id == asd)
+                .Where(u => u.Id == Guid.Parse("1e1fd1db-4ee5-4933-a51a-ead302e6db41"))
                 .Select(u => new UserModel()
                 {
                     Id = u.Id,
                     Name = u.Name,
                     Email = u.Email,
                     PhoneNumber = u.PhoneNumber,
-                    Country = u.Country,
                     Address = u.Address,
-                    ProfilePictureUrl = u.ProfilePictureUrl,
+                    ProfilePictureUrl = u.ImageUrl,
                 })
                 .FirstOrDefaultAsync();
 

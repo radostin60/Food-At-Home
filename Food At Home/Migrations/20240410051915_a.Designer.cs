@@ -4,6 +4,7 @@ using Food_At_Home.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Food_At_Home.Migrations
 {
     [DbContext(typeof(FoodDbContext))]
-    partial class FoodDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240410051915_a")]
+    partial class a
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,38 +37,6 @@ namespace Food_At_Home.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("e4f042b4-52d4-43fc-bfb2-53102b11b719"),
-                            Name = "Appetizers"
-                        },
-                        new
-                        {
-                            Id = new Guid("cbc7df0c-83f8-4ccd-acc8-d0bea62d0b33"),
-                            Name = "Pizzas"
-                        },
-                        new
-                        {
-                            Id = new Guid("87f0373e-6d3d-468d-8989-9894937d6517"),
-                            Name = "Burgers"
-                        },
-                        new
-                        {
-                            Id = new Guid("adf04d8f-4d96-4180-a7cd-19053a23bc81"),
-                            Name = "Salads"
-                        },
-                        new
-                        {
-                            Id = new Guid("c0a8af9e-feaf-46d6-92e7-5f44592947e0"),
-                            Name = "Drinks"
-                        },
-                        new
-                        {
-                            Id = new Guid("5c769ba4-1b92-496d-b18d-2bbde73e6ba1"),
-                            Name = "Desserts"
-                        });
                 });
 
             modelBuilder.Entity("Food_At_Home.Data.Models.Customer", b =>
@@ -83,13 +53,6 @@ namespace Food_At_Home.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Customers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("5646fe32-cf59-45db-b27d-9ddb76d0b8d6"),
-                            UserId = new Guid("2341fe11-cd36-40c1-b5e4-5c5831ee501d")
-                        });
                 });
 
             modelBuilder.Entity("Food_At_Home.Data.Models.Dish", b =>
@@ -262,14 +225,6 @@ namespace Food_At_Home.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Restaurants");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("ce604d6e-1a66-4059-9777-388cbc34ef84"),
-                            Description = "Welcome to Food At Home! Where every meal is a journey of flavors and every moment is savored. We're delighted to have you dine with us today. Sit back, relax, and get ready to indulge in culinary delights crafted just for you. Enjoy your time with us!",
-                            UserId = new Guid("b7892962-0426-48de-bd62-8ca55ebe930e")
-                        });
                 });
 
             modelBuilder.Entity("Food_At_Home.Data.Models.User", b =>
@@ -287,6 +242,7 @@ namespace Food_At_Home.Migrations
                         .HasColumnType("nvarchar(80)");
 
                     b.Property<string>("City")
+                        .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
@@ -357,71 +313,6 @@ namespace Food_At_Home.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("2341fe11-cd36-40c1-b5e4-5c5831ee501d"),
-                            AccessFailedCount = 0,
-                            Address = "Mazalat 16",
-                            City = "Kazanlak",
-                            ConcurrencyStamp = "af654062-8efd-4131-a082-5a1807af911b",
-                            Email = "radostin1@abv.bg",
-                            EmailConfirmed = false,
-                            ImageUrl = "",
-                            LockoutEnabled = false,
-                            Name = "Radostin Dimitrov",
-                            NormalizedEmail = "RADOSTIN1@ABV.BG",
-                            NormalizedUserName = "RADOSTIN1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPoDcqsSVJZ/y+vSG2CnLz4pphF0wqOnjkOJIyeIoofmLtJFLb0AkBl4m78OkRTBxg==",
-                            PhoneNumber = "0877311440",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "4b5dbe23-4c52-495e-af2f-8ca56a158a8b",
-                            TwoFactorEnabled = false,
-                            UserName = "radostin1"
-                        },
-                        new
-                        {
-                            Id = new Guid("b7892962-0426-48de-bd62-8ca55ebe930e"),
-                            AccessFailedCount = 0,
-                            Address = "Al. Batenberg 46",
-                            City = "Kazanlak",
-                            ConcurrencyStamp = "c95221d9-accd-4ce8-99e8-041715d30a65",
-                            Email = "dominos@abv.bg",
-                            EmailConfirmed = false,
-                            ImageUrl = "",
-                            LockoutEnabled = false,
-                            Name = "Domino's Pizza",
-                            NormalizedEmail = "DOMINOS@ABV.BG",
-                            NormalizedUserName = "DOMINOS",
-                            PasswordHash = "AQAAAAEAACcQAAAAEB3aVMx7Z3s2icIcJoFVV5kXeyF3Cf3dU/4cEX3UwTRn9lZLDho9ebHQGxC4ZI/pUw==",
-                            PhoneNumber = "0882759837",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "db159ed6-65ca-4562-9134-22a4a17c82a7",
-                            TwoFactorEnabled = false,
-                            UserName = "dominos"
-                        },
-                        new
-                        {
-                            Id = new Guid("1188c17d-0b5b-4041-90eb-6f1bdfbc6d71"),
-                            AccessFailedCount = 0,
-                            Address = "6-ti Septemvri 9",
-                            City = "Kazanlak",
-                            ConcurrencyStamp = "3c6916d2-26f7-49d4-9f2b-7bcbae29f99a",
-                            Email = "admin@abv.bg",
-                            EmailConfirmed = false,
-                            ImageUrl = "",
-                            LockoutEnabled = false,
-                            Name = "Admin Account",
-                            NormalizedEmail = "ADMIN@ABV.BG",
-                            NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHEDdTX8zh+B/oUJZbPkRxf+4DBXkImuMZsDMDgxbhxr4h3Q6NeWYu3Xm/DgJKlUMQ==",
-                            PhoneNumber = "0891231234",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "26f993b0-e84e-48a2-a774-b45f3dda7942",
-                            TwoFactorEnabled = false,
-                            UserName = "admin"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -450,29 +341,6 @@ namespace Food_At_Home.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("1e1fd1db-4ee5-4933-a51a-ead302e6db41"),
-                            ConcurrencyStamp = "2025b82f-4c32-4b33-8798-58e4c5e59fd6",
-                            Name = "Administrator",
-                            NormalizedName = "ADMINISTRATOR"
-                        },
-                        new
-                        {
-                            Id = new Guid("5534ff36-7149-4ffa-8581-16958c5f7d22"),
-                            ConcurrencyStamp = "498d41e0-f73b-4e23-9afd-11c8517f6b28",
-                            Name = "Restaurant",
-                            NormalizedName = "RESTAURANT"
-                        },
-                        new
-                        {
-                            Id = new Guid("d7a6c5ef-dbd7-4e21-bafc-258257e0894f"),
-                            ConcurrencyStamp = "7d3d883d-acf4-46eb-9a70-6ac4cb530a58",
-                            Name = "Customer",
-                            NormalizedName = "CUSTOMER"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -559,23 +427,6 @@ namespace Food_At_Home.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = new Guid("1188c17d-0b5b-4041-90eb-6f1bdfbc6d71"),
-                            RoleId = new Guid("1e1fd1db-4ee5-4933-a51a-ead302e6db41")
-                        },
-                        new
-                        {
-                            UserId = new Guid("2341fe11-cd36-40c1-b5e4-5c5831ee501d"),
-                            RoleId = new Guid("d7a6c5ef-dbd7-4e21-bafc-258257e0894f")
-                        },
-                        new
-                        {
-                            UserId = new Guid("b7892962-0426-48de-bd62-8ca55ebe930e"),
-                            RoleId = new Guid("5534ff36-7149-4ffa-8581-16958c5f7d22")
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
