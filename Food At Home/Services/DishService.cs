@@ -171,7 +171,7 @@ namespace Food_At_Home.Services
                 .Where(rd => rd.RestaurantId == restaurantId && rd.Quantity > 0)
                 .Select(rd => new DishViewModel()
                 {
-                    Id = rd.Id,
+                    Id = rd.Id.ToString(),
                     Name = rd.Name,
                     Description = rd.Description,
                     Ingredients = rd.Ingredients,
@@ -214,7 +214,7 @@ namespace Food_At_Home.Services
                 .Take(model.DishesPerPage)
                 .Select(d => new DishViewModel()
                 {
-                    Id = d.Id,
+                    Id = d.Id.ToString(),
                     Name = d.Name,
                     Ingredients = d.Ingredients,
                     Description = d.Description,
@@ -261,7 +261,7 @@ namespace Food_At_Home.Services
                 .Take(model.DishesPerPage)
                 .Select(d => new DishViewModel()
                 {
-                    Id = d.Id,
+                    Id = d.Id.ToString(),
                     Name = d.Name,
                     Ingredients = d.Ingredients,
                     Description = d.Description,

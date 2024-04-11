@@ -112,42 +112,42 @@ namespace Food_At_Home.Controllers
             return RedirectToAction("Menu", new { id = restaurantId });
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Delete(Guid id)
+        //[HttpPost]
+        public async Task<IActionResult> Delete(string id)
         {
 
 
             Guid restaurantId = await restaurantService.GetRestaurantId((Guid)User.GetId());
-            bool isDishExists = await dishService.ExistsById(id);
+            bool isDishExists = await dishService.ExistsById(Guid.Parse(id));
 
-            //if (!isDishExists)
-            //{
-            //    TempData[ErrorMessage] = "This dish does not exists!";
+            if (!isDishExists)
+            {
+                TempData[ErrorMessage] = "This dish does not exists!";
 
-            //    return RedirectToAction("Menu", new { id = restaurantId });
-            //}
+                return RedirectToAction("Menu", new { id = restaurantId });
+            }
 
-            //bool isRestaurant = await restaurantService.ExistsById(restaurantId);
+            bool isRestaurant = await restaurantService.ExistsById(restaurantId);
 
-            //if (!isRestaurant)
-            //{
-            //    TempData[ErrorMessage] = "You should be restaurant!";
+            if (!isRestaurant)
+            {
+                TempData[ErrorMessage] = "You should be restaurant!";
 
-            //    return RedirectToAction("Contact", "Home");
-            //}
+                return RedirectToAction("Index", "Home");
+            }
 
-            //bool isOwner = await dishService.IsRestaurantOwnerToDish(id, restaurantId);
+            bool isOwner = await dishService.IsRestaurantOwnerToDish(Guid.Parse(id), restaurantId);
 
-            //if (!isOwner)
-            //{
-            //    TempData[ErrorMessage] = "The dish must be in your menu to be deleted";
+            if (!isOwner)
+            {
+                TempData[ErrorMessage] = "The dish must be in your menu to be deleted";
 
-            //    return RedirectToAction("Menu", "Dish", new { id = restaurantId });
-            //}
+                return RedirectToAction("Menu", "Dish", new { id = restaurantId });
+            }
 
             try
             {
-                await dishService.Delete(id);
+                await dishService.Delete(Guid.Parse(id));
 
                 TempData[WarningMessage] = "This dish was successfully deleted";
 
