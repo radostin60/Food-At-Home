@@ -4,7 +4,7 @@ namespace Food_At_Home.Models
 {
     public class EditProfileModel
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         [StringLength(30)]

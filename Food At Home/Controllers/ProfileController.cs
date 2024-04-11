@@ -1,5 +1,6 @@
 ﻿using Food_At_Home.Contracts;
 using Food_At_Home.Extensions;
+using Food_At_Home.Models;
 using Microsoft.AspNetCore.Mvc;
 using static Food_At_Home.Notifications.NotificationConstants;
 
@@ -41,6 +42,59 @@ namespace Food_At_Home.Controllers
                 TempData[ErrorMessage] = ex.Message;
 
                 return RedirectToAction("Index", "Home");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            try
+            {
+                var user = await userService.GetUserByIdAsync(id);
+
+                var model = new EditProfileModel()
+                {
+                    Id = id,
+                    Name = user.Name,
+                    Email = user.Email,
+                    PhoneNumber = user.PhoneNumber,
+                    Country = user.Country,
+                    Address = user.Address,
+
+                };
+
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                TempData[ErrorMessage] = ex.Message;
+
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Guid id, EditProfileModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+
+            try
+            {
+                await profileService.Edit(id, model);
+
+                return RedirectToAction("MyProfile");
+            }
+            catch (Exception e)
+            {
+                TempData[ErrorMessage] = e.Message;
+
+                return RedirectToAction("Index", "Home");
+
             }
         }
     }

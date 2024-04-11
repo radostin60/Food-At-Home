@@ -11,7 +11,7 @@
                         <img src="@Model.ProfilePictureUrl" alt="..." width="130" class="rounded mb-2 img-thumbnail">
 
                     </div>
-                    <div class="media-body mb-5 text-white">
+                    <div class="media-body mb-5 text-black">
                         <h4 class="mt-0 mb-0">@Model.Name</h4>
                         <p class="small mb-4"><i class="fas fa-map-marker-alt mr-2"></i> @Model.City</p>
                         <a asp-action="Edit" asp-controller="Profile" asp-route-id="@Model.Id" class="btn btn-outline-dark btn-sm btn-block">Edit profile</a>
@@ -69,13 +69,7 @@
                     </div>
                 </div>
 
-                <div class="px-4 py-3">
-                    <button class="btn btn-toolbar btn-outline-dark" type="button" onclick="getlocation()">
-                        Current Position
-                    </button><br><br>
-                    <div id="demo2" style="width: 450px; height: 250px;">
-                    </div>
-                </div>
+              
             }
 
 
