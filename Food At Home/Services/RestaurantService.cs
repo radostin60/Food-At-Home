@@ -1,6 +1,7 @@
 ﻿using Food_At_Home.Contracts;
 using Food_At_Home.Data;
 using Food_At_Home.Data.Models;
+using Food_At_Home.Models.Dish;
 using Food_At_Home.Models.Restaurant;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,10 +10,12 @@ namespace Food_At_Home.Services
     public class RestaurantService:IRestaurantService
     {
         private readonly FoodDbContext context;
+        private readonly IImageService imageService;
 
-        public RestaurantService(FoodDbContext context)
+        public RestaurantService(FoodDbContext context, IImageService _imageService)
         {
             this.context = context;
+            this.imageService = _imageService;
         }
 
         public async Task<bool> ExistsById(Guid id)
@@ -90,6 +93,38 @@ namespace Food_At_Home.Services
             this.context.Remove(restaurant);
             await this.context.SaveChangesAsync();
 
+        }
+
+        public async Task EditRestaurant(Guid restaurantId, RestaurantFormModel model)
+        {
+            var restaurant = await context.Restaurants
+                .FirstOrDefaultAsync(d => d.Id == restaurantId);
+
+            restaurant.User.Name = model.Name;
+            restaurant.Description = model.Description;
+            restaurant.User.PhoneNumber = model.PhoneNumber;
+            restaurant.User.City = model.City;
+            restaurant.User.Address = model.Address;
+
+            await context.SaveChangesAsync();
+        }
+
+        public async Task<RestaurantFormModel?> GetRestaurantForForm(Guid id)
+        {
+            var restaurant = await context.Restaurants
+                .Where(r => r.Id == id)
+                .Select(r => new RestaurantFormModel()
+                {
+                    Id = r.Id,
+                    Name = r.User.Name,
+                    Description = r.Description,
+                    City = r.User.City,
+                    Address = r.User.Address
+                })
+                .FirstOrDefaultAsync();
+
+
+            return restaurant;
         }
     }
 }

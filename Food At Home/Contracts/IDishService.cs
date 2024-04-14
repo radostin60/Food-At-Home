@@ -27,10 +27,10 @@ namespace Food_At_Home.Contracts
 
         Task<OrderDishView?> GetDishForOrderById(Guid id);
 
-        //Task AddDishToCart(string username, Guid dishId, int quantity);
+        Task AddDishToCart(string username, Guid dishId, int quantity);
 
-        //void DecreaseDishQuantity(string username, Guid dishId);
+        void DecreaseDishQuantity(string username, Guid dishId);
 
-        //List<OrderDishView> GetCartDishes(string username);
+        List<OrderDishView> GetCartDishes(string username);
     }
 }

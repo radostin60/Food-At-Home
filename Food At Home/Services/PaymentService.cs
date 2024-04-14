@@ -15,7 +15,7 @@ namespace Food_At_Home.Services
             this.context = context;
         }
 
-        public async Task<string> CreatePayment(Guid customerId, PaymentFormModel model)
+        public async Task<Guid> CreatePayment(Guid customerId, PaymentFormModel model)
         {
             string[] expiryDate = model.ExpiryDate.Split('/');
             var payment = new Payment()
@@ -32,7 +32,7 @@ namespace Food_At_Home.Services
             await context.AddAsync(payment);
             await context.SaveChangesAsync();
 
-            return payment.Id.ToString();
+            return payment.Id;
         }
 
         public async Task AddPaymentOrderId(Guid paymentId, Guid orderId)

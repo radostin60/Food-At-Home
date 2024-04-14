@@ -14,6 +14,9 @@
     <input asp-for="Password" type="password" placeholder="Password" >
 
     <button type="submit">Log In</button>
+
+    <br>
+    <a asp-controller="User" asp-action="Register" class="already">You don't have an account? <b>Register here.</b></a>
 </form>
 
 <style>
@@ -114,3 +117,7 @@
         cursor: pointer;
     }
 </style>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

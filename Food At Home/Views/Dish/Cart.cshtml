@@ -1,0 +1,59 @@
+﻿@using Food_At_Home.Models.Dish
+@model List<OrderDishView>
+
+<h1 class="text-center text-dark" style="margin-bottom: 50px">Shopping Cart</h1>
+
+<div class="shopping-cart">
+
+    @if (Model != null && Model.Count > 0)
+    {
+
+        Guid restaurantId = (Guid)Model.Select(d => d.RestaurantId).ToList()[0];
+        decimal subtotal = Math.Round((decimal)Model.Select(d => d.Price * d.Quantity).Sum(), 2);
+        decimal tax = Math.Round((decimal)(0.05m * subtotal), 2);
+
+        <div class="column-labels">
+            <label class="product-image">Image</label>
+            <label class="product-details">Product</label>
+            <label class="product-price">Price</label>
+            <label class="product-quantity">Quantity</label>
+            <label class="product-removal">Remove</label>
+            <label class="product-line-price">Total</label>
+        </div>
+
+        @foreach (var dish in Model)
+        {
+            <partial name="_CartDishPartial" model="@dish" />
+        }
+
+        <div class="totals">
+            <div class="totals-item">
+                <label>Subtotal</label>
+                <div class="totals-value" id="cart-subtotal">@subtotal</div>
+            </div>
+            <div class="totals-item">
+                <label>Tax (5%)</label>
+                <div class="totals-value" id="cart-tax">@tax</div>
+            </div>
+            <div class="totals-item">
+                <label>Shipping</label>
+                <div class="totals-value" id="cart-shipping">5</div>
+            </div>
+            <div class="totals-item totals-item-total">
+                <label>Grand Total</label>
+                <div class="totals-value" id="cart-total">@(subtotal + tax + 5)</div>
+            </div>
+        </div>
+
+
+        <a asp-action="Payment" asp-controller="Payment" class="checkout">Checkout</a>
+        <a asp-controller="Restaurant" asp-action="All" id="continue" class="btn btn-warning text-black cont">Continue Shopping</a>
+    }
+    else
+    {
+        <h2 class="text-center text-black"> Your cart is empty!</h2>
+        <a asp-controller="Restaurant" asp-action="All" id="continue" class="btn btn-warning text-black">Continue Shopping</a>
+    }
+
+
+</div>

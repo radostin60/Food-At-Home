@@ -37,6 +37,9 @@
     <input asp-for="ImageUrl" type="file" placeholder="ProfilePicture">
 
     <button type="submit">Register</button>
+
+    <br>
+    <a asp-controller="User" asp-action="Login" class="already">You already have an account? <b>Login here.</b></a>
 </form>
 
 <style>
@@ -137,3 +140,7 @@
         cursor: pointer;
     }
 </style>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -269,6 +269,149 @@ namespace Food_At_Home.Controllers
         }
 
 
+        [AllowAnonymous]
+        public async Task<IActionResult> AddToCart(Guid dishId, int quantity = 1)
+        {
+            bool isRestaurant = await restaurantService.ExistsById((Guid)User.GetId());
+
+            if (isRestaurant)
+            {
+                Guid restaurantId = await restaurantService.GetRestaurantId((Guid)User.GetId());
+                TempData[ErrorMessage] = "You should be a client to order a dish";
+
+                return RedirectToAction("Menu", new { id = restaurantId });
+
+            }
+
+            bool isDishExists = await dishService.ExistsById(dishId);
+
+            if (!isDishExists)
+            {
+                TempData[ErrorMessage] = "This dish does not exists!";
+
+                return RedirectToAction("All", "Restaurant");
+            }
+
+            string username = User.GetUsername();
+            var cartDishes = dishService.GetCartDishes(username);
+            var dish = await dishService.GetDishForOrderById(dishId);
+
+            if (cartDishes == null || cartDishes.Count == 0)
+            {
+                await dishService.AddDishToCart(username, dishId, quantity);
+                return RedirectToAction("Cart");
+
+            }
+            else if (cartDishes.FirstOrDefault().RestaurantId != dish.RestaurantId)
+            {
+                TempData[ErrorMessage] = "Dish for order should be at the same restaurant as the previous dish";
+                return RedirectToAction("All", "Restaurant");
+            }
+
+            await dishService.AddDishToCart(username, dishId, quantity);
+            return RedirectToAction("Cart");
+
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> Cart()
+        {
+
+            bool isRestaurant = await restaurantService.ExistsById((Guid)User.GetId());
+            if (isRestaurant)
+            {
+                Guid restaurantId = await restaurantService.GetRestaurantId((Guid)User.GetId());
+                TempData[ErrorMessage] = "You should be a client to order a dish";
+
+                return RedirectToAction("Menu", new { id = restaurantId });
+            }
+
+            string username = User.GetUsername();
+
+
+            var dishes = dishService.GetCartDishes(username);
+
+            return View(dishes);
+
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> RemoveFromCart(Guid dishId)
+        {
+            bool isRestaurant = await restaurantService.ExistsById((Guid)User.GetId());
+
+            if (isRestaurant)
+            {
+                Guid restaurantId = await restaurantService.GetRestaurantId((Guid)User.GetId());
+                TempData[ErrorMessage] = "You should be a client to order a dish";
+
+                return RedirectToAction("Menu", new { id = restaurantId });
+            }
+
+            bool isDishExists = await dishService.ExistsById(dishId);
+
+            if (!isDishExists)
+            {
+                TempData[ErrorMessage] = "This dish does not exists!";
+
+                return RedirectToAction("All", "Restaurant");
+            }
+
+
+            List<OrderDishView> dishes =
+                HttpContext.Session.GetObjectFromJson<List<OrderDishView>>($"cart{User.GetUsername()}");
+
+            var dishToRemove = dishes.FirstOrDefault(d => d.Id == dishId);
+
+            if (dishes.Remove(dishToRemove))
+            {
+                HttpContext.Session.SetObjectAsJson($"cart{User.GetUsername()}", dishes);
+            }
+            else
+            {
+                TempData[ErrorMessage] = "This dish is not is your cart";
+                HttpContext.Session.SetObjectAsJson($"cart{User.GetUsername()}", dishes);
+
+                return RedirectToAction("Cart");
+            }
+
+            TempData[SuccessMessage] = "Successfully removed dish from cart";
+
+            return RedirectToAction("Cart");
+
+        }
+
+
+        [AllowAnonymous]
+        public async Task<IActionResult> DecreaseDishQuantity(Guid dishId)
+        {
+            bool isRestaurant = await restaurantService.ExistsById((Guid)User.GetId());
+
+            if (isRestaurant)
+            {
+                Guid restaurantId = await restaurantService.GetRestaurantId((Guid)User.GetId());
+                TempData[ErrorMessage] = "You should be a client to order a dish";
+
+                return RedirectToAction("Menu", new { id = restaurantId });
+
+            }
+            bool isDishExists = await dishService.ExistsById(dishId);
+
+            if (!isDishExists)
+            {
+                TempData[ErrorMessage] = "This dish does not exists!";
+
+                return RedirectToAction("All", "Restaurant");
+            }
+
+            string username = User.GetUsername();
+
+            dishService.DecreaseDishQuantity(username, dishId);
+
+            return RedirectToAction("Cart");
+        }
+
         private IActionResult GeneralError()
         {
             this.TempData[ErrorMessage] =

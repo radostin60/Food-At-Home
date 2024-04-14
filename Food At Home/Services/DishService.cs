@@ -4,6 +4,9 @@ using Food_At_Home.Data.Models;
 using Food_At_Home.Data.Models.Enums;
 using Food_At_Home.Models.Dish;
 using Microsoft.EntityFrameworkCore;
+using Food_At_Home.Extensions;
+using Microsoft.AspNetCore.Session;
+using Microsoft.AspNetCore.Http;
 
 namespace Food_At_Home.Services
 {
@@ -11,11 +14,13 @@ namespace Food_At_Home.Services
     {
         private readonly FoodDbContext _context;
         private readonly IImageService imageService;
+        private readonly IHttpContextAccessor accessor;
 
-        public DishService(FoodDbContext context, IImageService _imageService)
+        public DishService(FoodDbContext context, IImageService _imageService, IHttpContextAccessor accessor)
         {
             _context = context;
             imageService = _imageService;
+            this.accessor = accessor;
         }
 
         public async Task AddDish(Guid restaurantId, DishFormModel model)
@@ -277,6 +282,67 @@ namespace Food_At_Home.Services
                 Dishes = dishModel,
                 TotalDishes = totalDishes
             };
+        }
+
+
+        public async Task AddDishToCart(string username, Guid dishId, int quantity)
+        {
+
+            if (accessor.HttpContext.Session.GetObjectFromJson<List<OrderDishView>>($"cart{username}") == null)
+            {
+                var dish = await this.GetDishForOrderById(dishId);
+                List<OrderDishView> cart = new List<OrderDishView>();
+                cart.Add(dish);
+                accessor.HttpContext.Session.SetObjectAsJson($"cart{username}", cart);
+
+            }
+            else
+            {
+                List<OrderDishView> cart = accessor.HttpContext.Session.GetObjectFromJson<List<OrderDishView>>($"cart{username}");
+                var orderDish = cart.Where(d => d.Id == dishId).FirstOrDefault();
+                if (orderDish != null)
+                {
+                    cart[cart.IndexOf(orderDish)].Quantity += quantity;
+                }
+                else
+                {
+                    var dish = await this.GetDishForOrderById(dishId);
+                    cart.Add(dish);
+                }
+
+                accessor.HttpContext.Session.SetObjectAsJson($"cart{username}", cart);
+            }
+
+        }
+
+        public void DecreaseDishQuantity(string username, Guid dishId)
+        {
+            List<OrderDishView> cart = accessor.HttpContext.Session.GetObjectFromJson<List<OrderDishView>>($"cart{username}");
+            if (cart != null)
+            {
+                var orderDish = cart.FirstOrDefault(d => d.Id == dishId);
+                if (orderDish.Quantity > 1)
+                {
+                    cart[cart.IndexOf(orderDish)].Quantity -= 1;
+                }
+                else
+                {
+                    var dishToRemove = cart.FirstOrDefault(d => d.Id == dishId);
+
+                    if (cart.Remove(dishToRemove))
+                    {
+                        accessor.HttpContext.Session.SetObjectAsJson($"cart{username}", cart);
+                    }
+                }
+
+            }
+
+            accessor.HttpContext.Session.SetObjectAsJson($"cart{username}", cart);
+        }
+
+        public List<OrderDishView> GetCartDishes(string username)
+        {
+            return accessor.HttpContext.Session.GetObjectFromJson<List<OrderDishView>>($"cart{username}");
         }
 
     }

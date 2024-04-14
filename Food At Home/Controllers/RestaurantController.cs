@@ -136,12 +136,46 @@ namespace Food_At_Home.Controllers
 
                 TempData[WarningMessage] = "This restaurant was successfully deleted";
 
-                return this.RedirectToAction("All");
+                return this.RedirectToAction("All", "Restaurant");
             }
             catch (Exception)
             {
                 return this.GeneralError();
             }
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> Edit(Guid restaurantId)
+        {
+            try
+            {
+                var restaurant = await restaurantService.GetRestaurantForForm(restaurantId);
+                return View(restaurant);
+            }
+            catch (Exception)
+            {
+
+                return this.GeneralError();
+            }
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> Edit(Guid restaurantId, RestaurantFormModel model)
+        {
+            try
+            {
+                await restaurantService.EditRestaurant(restaurantId, model);
+            }
+            catch (Exception)
+            {
+                return this.GeneralError();
+            }
+
+            TempData[SuccessMessage] = "Successfully edited restaurant";
+
+            return RedirectToAction("All", "Restaurant");
         }
 
         private IActionResult GeneralError()

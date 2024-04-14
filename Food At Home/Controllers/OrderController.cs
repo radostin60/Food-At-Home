@@ -29,79 +29,79 @@ namespace Food_At_Home.Controllers
         }
 
 
-        //[HttpGet]
-        //public async Task<IActionResult> Order(Guid restaurantId, Guid paymentId)
-        //{
-        //    Guid userId = (Guid)User.GetId()!;
+        [HttpGet]
+        public async Task<IActionResult> Order(Guid restaurantId, Guid paymentId)
+        {
+            bool isRestaurant = await restaurantService.ExistsById((Guid)User.GetId());
+            if (isRestaurant)
+            {
+                Guid rId = await restaurantService.GetRestaurantId((Guid)User.GetId());
+                TempData[ErrorMessage] = "You should be a client to order a dish";
 
-        //    bool isRestaurant = await restaurantService.ExistsById(userId);
-        //    if (isRestaurant)
-        //    {
-        //        Guid? rId = await restaurantService.GetRestaurantId(userId);
-        //        TempData[ErrorMessage] = "You should be a client to order a dish";
+                return RedirectToAction("Menu", "Dish", new { id = rId });
+            }
+            string username = User.GetUsername();
 
-        //        return RedirectToAction("Menu", "Dish", new { id = rId });
-        //    }
-        //    string username = User.GetUsername();
+            var dishes = dishService.GetCartDishes(username);
 
-        //    var dishes = dishService.GetCartDishes(username);
+            //dishes.ForEach(d => d.IsEnabled = false);
+
+            OrderFormModel model = new OrderFormModel()
+            {
+
+                DishesForOrder = dishes,
+                RestaurantId = restaurantId,
+                PaymentId = paymentId,
+
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Order(OrderFormModel model)
+        {
+
+            bool isRestaurant = await restaurantService.ExistsById((Guid)User.GetId());
+            if (isRestaurant)
+            {
+                Guid rId = await restaurantService.GetRestaurantId((Guid)User.GetId());
+                TempData[ErrorMessage] = "You should be a client to order a dish";
+
+                return RedirectToAction("Menu", "Dish", new { id = rId });
+            }
+
+            string username = User.GetUsername();
+
+            if (!ModelState.IsValid)
+            {
+                model.DishesForOrder = dishService.GetCartDishes(username);
+                return View(model);
+            }
+
+            try
+            {
+
+                model.DishesForOrder = dishService.GetCartDishes(username);
 
 
-        //    OrderFormModel model = new OrderFormModel()
-        //    {
+                Guid customerId = (Guid)await customerService.GetCustomerId((Guid)User.GetId());
 
-        //        DishesForOrder = dishes,
-        //        RestaurantId = restaurantId,
-        //        PaymentId = paymentId,
+                var orderId = await orderService.CreateOrder(model, customerId);
 
-        //    };
+                await paymentsService.AddPaymentOrderId(model.PaymentId, orderId);
+            }
+            catch (Exception ex)
+            {
+                TempData[ErrorMessage] = ex.Message;
+                return View(model);
+            }
 
-        //    return View(model);
-        //}
+            HttpContext.Session.Clear();
 
-        //[HttpPost]
-        //public async Task<IActionResult> Order(OrderFormModel model)
-        //{
-        //    Guid userId = (Guid)User.GetId()!;
-        //    bool isRestaurant = await restaurantService.ExistsById(userId);
-        //    if (isRestaurant)
-        //    {
-        //        Guid rId = (Guid)await restaurantService.GetRestaurantId(userId);
-        //        TempData[ErrorMessage] = "You should be a client to order a dish";
-
-        //        return RedirectToAction("Menu", "Dish", new { id = rId });
-        //    }
-
-        //    string username = User.GetUsername();
-
-        //    if (!ModelState.IsValid)
-        //    {
-        //        model.DishesForOrder = dishService.GetCartDishes(username);
-        //        return View(model);
-        //    }
-
-        //    try
-        //    {
-
-        //        model.DishesForOrder = dishService.GetCartDishes(username);
-
-        //        Guid customerId = (Guid)await customerService.GetCustomerId(userId);
-
-        //        var orderId = await orderService.CreateOrder(model, customerId);
-
-        //        await paymentsService.AddPaymentOrderId(model.PaymentId, orderId);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        TempData[ErrorMessage] = ex.Message;
-        //        return View(model);
-        //    }
-
-        //    HttpContext.Session.Clear();
-
-        //    TempData[SuccessMessage] = "Successfully placed order!";
-        //    return RedirectToAction("UserOrders");
-        //}
+            TempData[SuccessMessage] = "Successfully placed order!";
+            return RedirectToAction("UserOrders");
+        }
 
     }
 }

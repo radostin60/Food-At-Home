@@ -9,6 +9,8 @@ namespace Food_At_Home.Contracts
 
         Task<RestaurantDetailsViewModel?> GetRestaurantById(Guid id);
 
+        Task<RestaurantFormModel?> GetRestaurantForForm(Guid id);
+
         Task<Guid> GetRestaurantId(Guid userId);
 
         Task<bool> ExistsById(Guid userId);
@@ -16,5 +18,7 @@ namespace Food_At_Home.Contracts
         Task Create(Guid userId);
 
         Task Delete(Guid restaurantId);
+
+        Task EditRestaurant(Guid restaurantId, RestaurantFormModel model);
     }
 }
