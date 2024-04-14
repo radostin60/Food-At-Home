@@ -67,6 +67,7 @@ namespace Food_At_Home.Controllers
                 UserName = model.Email,
                 Address = model.Address,
                 PhoneNumber = model.PhoneNumber,
+                City = model.City,
 
             };
 

@@ -15,7 +15,7 @@ namespace Food_At_Home.Models
 
         public string Country { get; set; }
 
-        //public string City { get; set; }
+        public string City { get; set; }
 
         public string Address { get; set; }
 

@@ -1,8 +1,5 @@
-﻿@model EditProfileModel;
-
-@{
-    ViewData["Title"] = "Edit Profile";
-}
+﻿@using Food_At_Home.Models.Restaurant;
+@model AddRestaurantViewModel;
 
 <div class="form-body">
     <div class="row">
@@ -21,6 +18,14 @@
                             <span asp-validation-for="Name" class="text-white"></span>
                         </div>
                         <div class="form-group">
+                            <input asp-for="Password" class="form-control" placeholder="Password">
+                            <span asp-validation-for="Password" class="text-white"></span>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="PasswordRepeat" class="form-control" placeholder="Password (repeat)">
+                            <span asp-validation-for="PasswordRepeat" class="text-white"></span>
+                        </div>
+                        <div class="form-group">
                             <input asp-for="PhoneNumber" class="form-control" placeholder="Phone number">
                             <span asp-validation-for="PhoneNumber" class="text-white"></span>
                         </div>
@@ -34,17 +39,16 @@
                         </div>
                         <div class="form-group">
                             <label for="profilePicture">Upload Profile Picture</label>
-                            <input asp-for="ImageUrl" accept="image/gif, image/jpeg, image/png" class="text-white" id="profilePicture">
-                            <span asp-validation-for="ImageUrl" class="text-white"></span>
+                            <input asp-for="ProfilePicture" accept="image/gif, image/jpeg, image/png" class="text-white" id="profilePicture">
+                            <span asp-validation-for="ProfilePicture" class="text-white"></span>
                         </div>
                         <div class="form-group">
                             <img alt="Uploaded Image" placeholder="Upload Profile Picture" accept="image/gif, image/jpeg, image/png" style="display:none;">
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-primary btn-block" type="submit">Edit</button>
+                            <button class="btn btn-primary btn-block" type="submit">Add</button>
                         </div>
                         <br>
-
                     </form>
                 </div>
             </div>

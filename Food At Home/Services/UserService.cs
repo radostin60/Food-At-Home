@@ -59,6 +59,7 @@ namespace Food_At_Home.Services
                     Email = u.Email,
                     PhoneNumber = u.PhoneNumber,
                     Address = u.Address,
+                    City = u.City,
                     ProfilePictureUrl = u.ImageUrl,
                 })
                 .FirstOrDefaultAsync();
@@ -76,6 +77,7 @@ namespace Food_At_Home.Services
                     Address = u.Address,
                     Email = u.Email,
                     Name = u.Name,
+                    City = u.City,
                     ProfilePictureUrl = u.ImageUrl,
                 })
                 .ToListAsync();
@@ -99,6 +101,7 @@ namespace Food_At_Home.Services
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
                 Address = user.Address,
+                City = user.City,
                 ProfilePictureUrl = user.ImageUrl,
 
             };

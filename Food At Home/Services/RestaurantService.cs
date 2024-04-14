@@ -81,5 +81,15 @@ namespace Food_At_Home.Services
 
             return restaurants;
         }
+
+        public async Task Delete(Guid Id)
+        {
+            var restaurant = await context.Restaurants
+                .FirstAsync(d => d.Id == Id);
+
+            this.context.Remove(restaurant);
+            await this.context.SaveChangesAsync();
+
+        }
     }
 }

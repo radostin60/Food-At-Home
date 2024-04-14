@@ -58,7 +58,8 @@ namespace Food_At_Home.Controllers
                     Name = user.Name,
                     Email = user.Email,
                     PhoneNumber = user.PhoneNumber,
-                    Country = user.Country,
+                    City = user.City,
+                   // Country = user.Country,
                     Address = user.Address,
 
                 };

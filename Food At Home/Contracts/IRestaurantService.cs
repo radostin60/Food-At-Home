@@ -1,4 +1,5 @@
-﻿using Food_At_Home.Models.Restaurant;
+﻿using Food_At_Home.Models.Dish;
+using Food_At_Home.Models.Restaurant;
 
 namespace Food_At_Home.Contracts
 {
@@ -13,5 +14,7 @@ namespace Food_At_Home.Contracts
         Task<bool> ExistsById(Guid userId);
 
         Task Create(Guid userId);
+
+        Task Delete(Guid restaurantId);
     }
 }

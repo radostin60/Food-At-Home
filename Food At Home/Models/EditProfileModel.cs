@@ -19,9 +19,9 @@ namespace Food_At_Home.Models
         [Required]
         public string PhoneNumber { get; set; } = null!;
 
-        [Required]
-        [StringLength(20)]
-        public string Country { get; set; } = null!;
+        //[Required]
+        //[StringLength(20)]
+        //public string Country { get; set; } = null!;
 
         [Required]
         [StringLength(20)]
