@@ -21,8 +21,7 @@ namespace Food_At_Home.Data.Models
         [StringLength(50)]
         public string CardHolder { get; set; } = null!;
 
-        [Required]
-        [Precision(4,2)]
+        [Precision(18,2)]
         public decimal Amount { get; set; }
 
         [Required]

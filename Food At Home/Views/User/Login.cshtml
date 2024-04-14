@@ -4,9 +4,9 @@
     <div class="shape"></div>
     <div class="shape"></div>
 </div>
-<form method="post">
+<form method="post" class="requires-validation">
     <h3>Login Here</h3>
-
+    <div asp-validation-summary="ModelOnly" class="text-white"></div>
     <label for=" ">Email</label>
     <input asp-for="Email" type="text" placeholder="Email" >
 

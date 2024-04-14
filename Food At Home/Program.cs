@@ -41,6 +41,11 @@ builder.Services.ConfigureApplicationCookie(opt =>
     opt.LoginPath = "/User/Login";
 });
 
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(10);
+});
+
 ConfigureCloudaryService(builder.Services, builder.Configuration);
 
 var app = builder.Build();
@@ -59,6 +64,7 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseSession();
 
 app.UseRouting();
 
