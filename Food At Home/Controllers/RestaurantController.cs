@@ -80,10 +80,6 @@ namespace Food_At_Home.Controllers
                 ModelState.AddModelError(nameof(model.Email), "There is already registered user with this email");
             }
 
-            if (await userService.ExistsByPhone(model.PhoneNumber))
-            {
-                ModelState.AddModelError(nameof(model.PhoneNumber), "There is already registered user with this phone number");
-            }
 
             if (!ModelState.IsValid)
             {
