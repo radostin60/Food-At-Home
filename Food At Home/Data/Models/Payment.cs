@@ -27,10 +27,10 @@ namespace Food_At_Home.Data.Models
         [Required]
         public DateTime ExpiryDate {  get; set; }
 
-        [Required]
+        
         [ForeignKey(nameof(Order))]
-        public Guid OrderId { get; set; }
-        public Order Order { get; set; }
+        public Guid? OrderId { get; set; }
+        public Order? Order { get; set; }
 
         [Required]
         [ForeignKey(nameof(Customer))]

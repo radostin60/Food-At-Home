@@ -26,11 +26,10 @@ namespace Food_At_Home.Data.Models
         [Required]
         public DateTime OrderTime { get; set; }
 
-        [Required]
         public DateTime? DeliveryTime { get; set; }
 
         [Required]
-        [Precision(4,2)]
+        [Precision(18,2)]
         public decimal Price { get; set; }
 
         [ForeignKey(nameof(Payment))]
