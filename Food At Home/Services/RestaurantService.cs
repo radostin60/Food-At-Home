@@ -98,6 +98,7 @@ namespace Food_At_Home.Services
         public async Task EditRestaurant(Guid restaurantId, RestaurantFormModel model)
         {
             var restaurant = await context.Restaurants
+                .Include(r => r.User)
                 .FirstOrDefaultAsync(d => d.Id == restaurantId);
 
             restaurant.User.Name = model.Name;
@@ -119,7 +120,8 @@ namespace Food_At_Home.Services
                     Name = r.User.Name,
                     Description = r.Description,
                     City = r.User.City,
-                    Address = r.User.Address
+                    Address = r.User.Address,
+                    PhoneNumber = r.User.PhoneNumber
                 })
                 .FirstOrDefaultAsync();
 
