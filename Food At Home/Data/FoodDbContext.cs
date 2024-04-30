@@ -8,12 +8,18 @@ namespace Food_At_Home.Data
 {
     public class FoodDbContext : IdentityDbContext<User,IdentityRole<Guid>, Guid>
     {
+        private FoodDbContext context;
+
         public FoodDbContext(DbContextOptions<FoodDbContext> options)
             : base(options)
         {
 
         }
 
+        //public FoodDbContext(FoodDbContext context)
+        //{
+        //    this.context = context;
+        //}
 
         public DbSet<Category> Categories { get; set; } = null!;
         public DbSet<Customer> Customers { get; set; } = null!;

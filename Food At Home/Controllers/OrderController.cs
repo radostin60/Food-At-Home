@@ -45,7 +45,7 @@ namespace Food_At_Home.Controllers
 
             var dishes = dishService.GetCartDishes(username);
 
-            //dishes.ForEach(d => d.IsEnabled = false);
+            
 
             OrderFormModel model = new OrderFormModel()
             {
